@@ -5,23 +5,19 @@
 	$password = $_POST['password'];
 	$logged = false;
 
-	$statement = $db->prepare("SELECT COUNT(id) from users WHERE email = :email and password = :password ");
+	$statement = $db->prepare("SELECT id, email, password from users WHERE email = :email");
 	$statement->bindParam(':email', $email);
-	$statement->bindParam(':password', $password);
 	$statement->execute();
 
-	$count = $statement->fetchColumn();
+	$results = $statement->fetch(PDO::FETCH_ASSOC);
 
-	if ( $count === "1") {
-		$stm = $db->prepare("SELECT id from users WHERE email = :email and password = :password ");
-		$stm->bindParam(':email', $email);
-		$stm->bindParam(':password', $password);
-		$stm->execute(); 
-				
-		$row = $stm->fetch(PDO::FETCH_ASSOC);
+	if( count($results) > 0 && password_verify($password, $results['password']) ) {
 		session_start();
-		$_SESSION['userID'] = $row['id'];
+		$_SESSION['userID'] = $results['id'];
+		echo 1;
+	}
+	else {
+		echo 0;
 	}
 
-	echo $count;
 ?>
