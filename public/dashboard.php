@@ -15,7 +15,6 @@
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
 </head>
-
 <body>
 	<header class="head">
 		<div class="wrapper">
@@ -27,24 +26,26 @@
 		</div>
 	</header>
 	<main>
-		<div class="wrapper dashboard">
-			<div class="pdfSOurce">
-				<div>
-					<label for="cssSource">Enter CSS source</label>
-					<textarea name="cssSource" id="cssSource" rows="10"></textarea>
+		<form action="actionpdf.php" method="POST">
+			<div class="wrapper dashboard">
+				<div class="pdfSOurce">
+					<div>
+						<label for="cssSource">Enter CSS source</label>
+						<textarea name="cssSource" id="cssSource" rows="10"></textarea>
+					</div>
+					<div>
+						<label for="htmlSource">Enter HTML source</label>
+						<textarea name="htmlSource" id="htmlSource" rows="10"></textarea>
+					</div>
+					<div>
+						<button type="submit" id="generatePdf" class="btn">Generate pdf</button>
+					</div>
 				</div>
-				<div>
-					<label for="cssSource">Enter CSS source</label>
-					<textarea name="cssSource" id="cssSource" rows="10"></textarea>
-				</div>
-				<div>
-					<span id="generatePdf" class="btn">Generate pdf</span>
+				<div class="uploadFile">
+					<input type="file" name="uploadPdf">
 				</div>
 			</div>
-			<div class="uploadFile">
-				<input type="file" name="uploadPdf">
-			</div>
-		</div>
+		</form>
 	</main>
 
 	<script src="assets/front/js/scripts.js"></script>
