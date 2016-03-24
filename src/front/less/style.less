@@ -3,6 +3,8 @@
 @import "../../modules/less/flexboxgrid";
 @import "sprite";
 
+@border_color: #cecece;
+
 html {
 	font-size: 16px;
 }
@@ -168,12 +170,19 @@ input[type=number] {
 	justify-content: space-between;
 
 	> div {
-		max-width: 50%;
 		padding: 20px 0;
+	}
+
+	.codeSource {
+		max-width:60%;
+	}
+
+	.fileSource {
+		max-width:30%;
 	}
 }
 
-.pdfSOurce {
+.codeSource {
 	width: 100%;
 
 	div {
@@ -184,14 +193,21 @@ input[type=number] {
 		width: 100%;
 		display: block;
 		resize: vertical;
+		padding: 10px;
+		border: 1px solid @border_color;
+
+		&::placeholder {
+			color: @border_color;
+		}
 	}
 
 	label {
 		display: block;
+		margin-bottom:5px;
 	}
 }
 
-.uploadFile {
+.fileSource {
 }
 
 @import "../../modules/less/mediaQueries";

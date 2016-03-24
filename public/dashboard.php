@@ -26,26 +26,30 @@
 		</div>
 	</header>
 	<main>
-		<form action="actionpdf.php" method="POST">
-			<div class="wrapper dashboard">
-				<div class="pdfSOurce">
+		<div class="wrapper dashboard">
+			<div class="codeSource">
+				<form action="pdf-from-source.php" name="" method="POST">
 					<div>
 						<label for="cssSource">Enter CSS source</label>
-						<textarea name="cssSource" id="cssSource" rows="10"></textarea>
+						<textarea name="cssSource" placeholder="Paste here ONLY CSS code" id="cssSource" rows="10" required></textarea>
 					</div>
 					<div>
 						<label for="htmlSource">Enter HTML source</label>
-						<textarea name="htmlSource" id="htmlSource" rows="10"></textarea>
+						<textarea name="htmlSource" placeholder="Paste here HTML Code" id="htmlSource" rows="10" required></textarea>
 					</div>
 					<div>
 						<button type="submit" id="generatePdf" class="btn">Generate pdf</button>
 					</div>
-				</div>
-				<div class="uploadFile">
-					<input type="file" name="uploadPdf">
-				</div>
+				</form>
 			</div>
-		</form>
+			<div class="fileSource">
+				<form action="pdf-from-file.php" name="" method="POST">
+					<input type="file" name="uploadHTML" required>
+<!--					<input type="file" name="uploadCSS">-->
+					<button type="Submit" class="btn"> Upload & Generate</button>
+				</form>
+			</div>
+		</div>
 	</main>
 
 	<script src="assets/front/js/scripts.js"></script>
