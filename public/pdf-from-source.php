@@ -9,7 +9,7 @@ $html   = preg_replace("/<link href=.*?>(.*?)/", "", $html);
 $html   = preg_replace("/<script>(.*?)<\/script>/", "", $html);
 $css    = $_POST['cssSource'];
 
-$mpdf   = new mPDF('utf-8','A4','','' , 0 , 0 , 0 , 0 , 0 , 0);
+$mpdf   = new mPDF('utf-8','A4','','' , 2 , 2 , 2 , 2 , 2 , 2);
 $mpdf->setAutoTopMargin = 'stretch'; // Set pdf top margin to stretch to avoid content overlapping
 $mpdf->setAutoBottomMargin = 'stretch'; // Set pdf bottom margin to stretch to avoid content overlapping
 $mpdf->SetDisplayMode('fullpage');
