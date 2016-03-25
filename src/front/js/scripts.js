@@ -1,12 +1,15 @@
-/*global console:false, Browser:false, jQuery:false*/
+/*global console:false, alert:false,Browser:false, jQuery:false*/
 
 (function($) {
 'use strict';
 	$(document).ready(function() {
 	 
 		var userAuthenticate = new UserAuthenticate();
+		var livepr			 = new LivePreview();
+
 	});
 
+	/* Login/Logout/Register functionality -----------------------------*/
 	function UserAuthenticate()  {
 		this.loginForm 			= $('form[name="loginForm"]');
 		this.registerForm 		= $('form[name="registerForm"]');
@@ -87,5 +90,51 @@
 			});
 		});
 	};
+
+	/* Live preview when entering HTML/CSS code -----------------------*/
+	function LivePreview() {
+		this.iframe 		= $('#livepreviewIframe');
+		this.contents 		= this.iframe.contents();
+		this.body 			= this.contents.find('body');
+		this.styleTag 		= this.contents.find('head').append('<style></style>').children('style');
+
+		this.events();
+	}
+
+	LivePreview.prototype.events = function() {
+		var _this = this;
+
+		$('.codeSource textarea').on('focus', function() {
+			$(this).on('keyup', function() {
+
+				if ( $(this).attr('name') === 'htmlSource')
+					_this.body.html( $(this).val() );
+				else
+					_this.styleTag.text( $(this).val() );
+
+			});
+		});
+
+		var fileInput = document.getElementById('uploadHTML');
+		var fileDisplayArea = document.getElementById('fileDisplayArea');
+
+		$('#uploadHTML').on('change', function(e) {
+			var file = fileInput.files[0];
+			var textType = /html.*/;
+
+			if (file.type.match(textType)) {
+				var reader = new FileReader();
+
+				reader.onload = function(e) {
+					_this.body.html( reader.result );
+				};
+
+				reader.readAsText(file);
+			} else {
+				fileDisplayArea.innerText = 'File not supported!';
+			}
+		});
+	};
+
 
 })(jQuery);

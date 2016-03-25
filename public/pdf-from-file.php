@@ -17,7 +17,7 @@ foreach ($styleTags as $style) {
     $css .= $style -> firstChild -> data;
 }
 
-$mpdf   = new mPDF('utf-8','A4','','' , 2 , 2 , 2 , 2 , 2 , 2);
+$mpdf   = new mPDF('utf-8','A4','','' , 0 , 0 , 0 , 0 , 0 , 0);
 $mpdf->setAutoTopMargin = 'stretch'; // Set pdf top margin to stretch to avoid content overlapping
 $mpdf->setAutoBottomMargin = 'stretch'; // Set pdf bottom margin to stretch to avoid content overlapping
 $mpdf->SetDisplayMode('fullpage');

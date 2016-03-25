@@ -26,9 +26,13 @@
 		</div>
 	</header>
 	<main>
+		<div class="wrapper livepreview">
+			<div id="fileDisplayArea"></div>
+			<iframe id="livepreviewIframe"></iframe>
+		</div>
 		<div class="wrapper dashboard">
 			<div class="codeSource">
-				<form action="pdf-from-source.php" name="" method="POST" enctype="multipart/form-data">
+				<form action="pdf-from-source.php" name="codeSource" method="POST" enctype="multipart/form-data">
 					<div>
 						<label for="cssSource">Enter CSS source</label>
 						<textarea name="cssSource" placeholder="Paste here ONLY CSS code" id="cssSource" rows="10" required></textarea>
@@ -46,7 +50,7 @@
 				<form action="pdf-from-file.php" name="" method="POST" enctype="multipart/form-data">
 					<label>
 						<span>CSS needs to be inline in style tag.</span>
-						<input type="file" name="uploadHTML" required>
+						<input type="file" name="uploadHTML" id="uploadHTML" required>
 					</label>
 					<button type="Submit" class="btn"> Upload & Generate</button>
 				</form>
