@@ -15,7 +15,7 @@
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
 </head>
-<body>
+<body id="target">
 	<header class="head">
 		<div class="wrapper">
 			<span id="logOutButton" class="btn">Log out</span>
@@ -26,10 +26,17 @@
 		</div>
 	</header>
 	<main>
+
 		<div class="wrapper livepreview">
 			<div id="fileDisplayArea"></div>
 			<iframe id="livepreviewIframe"></iframe>
 		</div>
+
+		<input type="submit" value="Take Screenshot Of Div" onclick="capture();" />
+		<form method="POST" enctype="multipart/form-data" action="save.php" id="myForm">
+			<input type="hidden" name="img_val" id="img_val" value="" />
+		</form>
+
 		<div class="wrapper dashboard">
 			<div class="codeSource">
 				<form action="pdf-from-source.php" name="codeSource" method="POST" enctype="multipart/form-data">
@@ -59,6 +66,20 @@
 	</main>
 
 	<script src="assets/front/js/scripts.js"></script>
+
+	<script type="text/javascript">
+		function capture() {
+			$('#target').html2canvas({
+				onrendered: function (canvas) {
+					//Set hidden field's value to image data (base-64 string)
+					$('#img_val').val(canvas.toDataURL("image/png"));
+					//Submit the form manually
+					document.getElementById("myForm").submit();
+				}
+			});
+		}
+	</script>
+
 	<!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>
 </body>

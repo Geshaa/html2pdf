@@ -1,4 +1,4 @@
-/*global console:false, alert:false,Browser:false, jQuery:false*/
+/*global console:false, alert:false,Browser:false, html2canvas:false, jQuery:false*/
 
 (function($) {
 'use strict';
@@ -7,7 +7,9 @@
 		var userAuthenticate = new UserAuthenticate();
 		var livepr			 = new LivePreview();
 
+
 	});
+
 
 	/* Login/Logout/Register functionality -----------------------------*/
 	function UserAuthenticate()  {

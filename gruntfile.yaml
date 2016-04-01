@@ -11,6 +11,8 @@ dest:
             modules:
                 - Browser
                 - jQuery
+                - html2canvas
+                - jqueryCanvas
 
             scripts:
                 - scripts
