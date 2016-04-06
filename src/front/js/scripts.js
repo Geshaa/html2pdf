@@ -114,6 +114,8 @@
 				else
 					_this.styleTag.text( $(this).val() );
 
+
+				_this.iframe.css('height', '350px');
 			});
 		});
 
@@ -132,6 +134,8 @@
 				};
 
 				reader.readAsText(file);
+				_this.iframe.css('height', '350px');
+
 			} else {
 				fileDisplayArea.innerText = 'File not supported!';
 			}

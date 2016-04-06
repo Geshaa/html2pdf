@@ -1,6 +1,8 @@
 <?php
 include 'config.php';
 include 'mpdf/mpdf.php';
+include 'page2images.php';
+
 session_start();
 
 if ($_FILES['uploadHTML']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['uploadHTML']['tmp_name']) && $_FILES['uploadHTML']['type'] == 'text/html') {
@@ -24,10 +26,11 @@ $mpdf->SetDisplayMode('fullpage');
 $mpdf->WriteHTML($fileContent);
 $mpdf->Output('filename'.date('m-d-Y').'.pdf', 'D');
 
-$stm = $db->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated) VALUES ( :user_id, :htmlSource, :cssSource, NOW())");
+$stm = $db->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated, photo) VALUES ( :user_id, :htmlSource, :cssSource, NOW(), :photo)");
 $stm->bindParam(':user_id', $_SESSION['userID']);
 $stm->bindParam(':htmlSource', $fileContent);
 $stm->bindParam(':cssSource', $css);
+$stm->bindParam(':photo', call_p2i_with_callback());
 $stm->execute();
 
 ?>

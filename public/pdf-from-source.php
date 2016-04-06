@@ -1,6 +1,7 @@
 <?php
 include 'config.php';
 include 'mpdf/mpdf.php';
+include 'page2images.php';
 session_start();
 
 //this is when html and css are separated files and code is put into textboxes
@@ -16,14 +17,15 @@ $mpdf->SetDisplayMode('fullpage');
 $mpdf->WriteHTML($css, 1);
 $mpdf->WriteHTML($html, 2);
 
-$mpdf->Output('pdf'.date('m-d-Y').'.pdf', 'D');
+$mpdf->Output('filename'.date('m-d-Y').'.pdf', 'D');
 // F - force save
 // D - open or save
 
-$stm = $db->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated) VALUES ( :user_id, :htmlSource, :cssSource, NOW())");
+$stm = $db->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated, photo) VALUES ( :user_id, :htmlSource, :cssSource, NOW(), :photo )");
 $stm->bindParam(':user_id', $_SESSION['userID']);
 $stm->bindParam(':htmlSource', $html);
 $stm->bindParam(':cssSource', $css);
+$stm->bindParam(':photo', call_p2i_with_callback());
 $stm->execute();
 
 ?>

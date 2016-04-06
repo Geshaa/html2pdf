@@ -3,9 +3,6 @@
 $apikey = "349b169c99a2d555";
 $api_url = "http://api.page2images.com/restfullink";
 
-//It is the simplest way to call it. Of cause, you can remove it as needed.
-call_p2i_with_callback();
-
 // curl to connect server
 function connect($url, $para)
 {
@@ -50,17 +47,12 @@ function call_p2i_with_callback()
         if (empty($json_data->status)) {
             // api error do something
             echo "api error";
-        }else
-        {
+        } else {
             //do anything
             $b64image = base64_encode(file_get_contents($json_data->image_url));
-            echo $json_data->status;
-
             $src = 'data: image/png;base64,'.$b64image;
-            // Echo out a sample image
-            echo '<img src="'.$src.'">';
+            return $src;
         }
     }
-
 }
 

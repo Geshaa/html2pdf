@@ -31,11 +31,6 @@
 			<iframe id="livepreviewIframe"></iframe>
 		</div>
 
-		<form method="POST" enctype="multipart/form-data" action="page2images.php" id="myForm">
-			<input type="hidden" name="img_val" id="img_val" value="" />
-			<input type="submit" value="Take Screenshot Of Div" onclick="capture();" />
-		</form>
-
 		<div class="wrapper dashboard">
 			<div class="codeSource">
 				<form action="pdf-from-source.php" name="codeSource" method="POST" enctype="multipart/form-data">
@@ -50,18 +45,22 @@
 					<div>
 						<button type="submit" id="generatePdf" class="btn">Generate pdf</button>
 					</div>
-				</form >
+				</form>
 			</div>
 			<div class="fileSource">
-				<form action="pdf-from-file.php" name="" method="POST" enctype="multipart/form-data">
+				<form action="pdf-from-file.php" name="fileSource" method="POST" enctype="multipart/form-data">
 					<label>
 						<span>CSS needs to be inline in style tag.</span>
 						<input type="file" name="uploadHTML" id="uploadHTML" required>
 					</label>
-					<button type="Submit" class="btn"> Upload & Generate</button>
+					<button type="submit" class="btn"> Upload & Generate</button>
 				</form>
 			</div>
 		</div>
+
+		<form method="POST" enctype="multipart/form-data" action="page2images.php" id="myForm">
+			<input type="submit" value="Take Screenshot Of Div" onclick="capture();" />
+		</form>
 	</main>
 
 	<script src="assets/front/js/scripts.js"></script>
