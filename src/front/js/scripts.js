@@ -1,4 +1,4 @@
-/*global console:false, alert:false,Browser:false, html2canvas:false, jQuery:false*/
+/*global console:false, alert:false,Browser:false, jQuery:false*/
 
 (function($) {
 'use strict';
