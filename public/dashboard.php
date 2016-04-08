@@ -57,10 +57,6 @@
 				</form>
 			</div>
 		</div>
-
-		<form method="POST" enctype="multipart/form-data" action="page2images.php" id="myForm">
-			<input type="submit" value="Take Screenshot Of Div" onclick="capture();" />
-		</form>
 	</main>
 
 	<script src="assets/front/js/scripts.js"></script>
