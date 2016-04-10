@@ -3,11 +3,11 @@
 (function($) {
 'use strict';
 	$(document).ready(function() {
-	 
-		var userAuthenticate = new UserAuthenticate();
-		var livepr			 = new LivePreview();
 
-
+		var userAuthenticate 	= new UserAuthenticate();
+		var livepr			 	= new LivePreview();
+		var popup      			= new Popups();
+		var admin				= new AdminOperations();
 	});
 
 
@@ -36,8 +36,10 @@
 					console.log(data);
 					var __this = _this;
 
-					if ( data === '1' )
+					if ( data === '0' )
 						window.location = __this.url + '/dashboard.php';
+					else if ( data === '1')
+						window.location = __this.url + '/admin.php';
 					else 
 						__this.loginForm.find('.formHolder__message').addClass('active');
 					
@@ -114,8 +116,7 @@
 				else
 					_this.styleTag.text( $(this).val() );
 
-
-				_this.iframe.css('height', '350px');
+				_this.iframe.css('height', '350px').parent().addClass('visible');
 			});
 		});
 
@@ -134,11 +135,137 @@
 				};
 
 				reader.readAsText(file);
-				_this.iframe.css('height', '350px');
+				_this.iframe.css('height', '350px').parent().addClass('visible');
 
 			} else {
 				fileDisplayArea.innerText = 'File not supported!';
 			}
+		});
+	};
+
+
+	/* Popup functionality ---------*/
+	function Popups() {
+		this.openPopup       		= $('[data-popup-open]');
+		this.closePopup      		= $('[data-popup-close]');
+		this.overlay         		= $('[data-overlay="popup"]');
+		this.overlayVisibleCLass 	= 'visible';
+		this.popupActiveClass    	= 'active';
+		this.events();
+	}
+
+	Popups.prototype.events = function() {
+		var _this = this;
+
+		//you can exclude Browser and replace Browser.click() with 'click' or 'tochstart'  ---*/
+		$(document).on( Browser.click(), this.openPopup.selector, function(e) {
+			e.preventDefault();
+			var elToOpen = $(this).attr('data-popup-open');
+
+			_this.overlay.addClass( _this.overlayVisibleCLass );
+			$('[data-popup="'+elToOpen+'"]').addClass('active');
+			$('[data-popup="'+elToOpen+'"]').find('.btn').attr('data-user-id', $(this).attr('data-id'));
+		});
+
+		$(document).on( Browser.click(), this.closePopup.selector, function(e) {
+			e.preventDefault();
+			var elToClose = $(this).attr('data-popup-close');
+
+			$('[data-popup="'+elToClose+'"]').removeClass('active');
+			_this.overlay.removeClass( _this.overlayVisibleCLass );
+		});
+
+		$(document).on( Browser.click(), this.overlay.selector, function() {
+			$('[data-popup]').removeClass('active');
+			_this.overlay.removeClass( _this.overlayVisibleCLass );
+		});
+
+		
+	};
+
+
+	/* Admin page operations ---------------------------------------*/
+	function AdminOperations() {
+		this.deleteUserBtn			= $('#deleteUser');
+		this.updateUserForm			= $('form[name="updateUserForm"]');
+		this.usersTable 			= $('#listAllUsers tbody');
+		this.openUpdateForm			= $('.userEdit');
+
+		this.init();
+		this.events();
+	}
+
+	AdminOperations.prototype.init = function() {
+		var _this = this;
+
+		if ( this.usersTable.length ) {
+
+			this.usersTable.empty();
+
+			$.ajax({
+				url: 'listAllUsers.php',
+				type: 'POST',
+				success: function(data) {
+					var __this = _this;
+					var decodedData = JSON.parse(data);
+
+					$.each(decodedData, function(key, val) {
+						
+						__this.usersTable.append('<tr><td class="readFirstName">' + val.firstName + '</td><td class="readLastName">' + val.lastName + '</td><td class="readEmail">' + val.email + '</td><td><span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit">Edit</span><span data-id="'+ val.id +'" data-popup-open="deleteUser" class="btn userDelete">Delete</span></td></tr>');
+					});
+
+				},
+				error: function() {
+					console.log('problem with listing users');
+				}
+			});
+		}
+	};
+
+	AdminOperations.prototype.events = function() {
+		var _this = this;
+
+		$(document).on(Browser.click(), this.deleteUserBtn.selector , function() {
+			var __this = _this;
+
+			$.ajax({
+				url: 'deleteUser.php',
+				type: 'POST',
+				data: {
+					userID: $(this).attr('data-user-id')
+				},
+				success: function(data) {
+					__this.init();
+				},
+				error: function() {
+					console.log('problem with deleting user');
+				}
+			});
+		});
+
+		$(document).on(Browser.click(), this.openUpdateForm.selector, function() {
+			$('#userID').val( $(this).attr('data-id') );
+			$('#edit-first-name').val( $(this).closest('tr').find('.readFirstName').text() );
+			$('#edit-last-name').val( $(this).closest('tr').find('.readLastName').text() );
+			$('#edit-password').val( $(this).closest('tr').find('.readEmail').text() );
+		});
+
+		$(document).on('submit', this.updateUserForm.selector , function(e) {
+			e.preventDefault();
+			var __this = _this;
+
+			$.ajax({
+				url: 'updateUser.php',
+				type: 'POST',
+				data: $(this).serialize(),
+				success: function(data) {
+					$('[data-popup-close="editUserData"]').trigger('click');
+					__this.init();
+				},
+				error: function() {
+					console.log('problem with deleting user');
+				}
+			});
 		});
 	};
 

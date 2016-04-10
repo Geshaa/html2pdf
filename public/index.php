@@ -27,7 +27,7 @@
 			</div>
 			<div class="formHolder__buttons">
 				<span class="openForm" data-open="registerHolder">Register</span>
-				<input type="submit" value="Submit">
+				<input type="submit" value="Submit" class="btn">
 			</div>
 			<p class="formHolder__message">Invalid username or password</p>
 		</form>
@@ -49,7 +49,7 @@
 			</div>
 			<div class="formHolder__buttons">
 				<span class="openForm" data-open="loginHolder">Login</span>
-				<input type="submit" value="Register">
+				<input type="submit" value="Register" class="btn">
 			</div>
 			<p class="formHolder__message">This email address is already taken.</p>
 		</form>

@@ -18,11 +18,11 @@
 <body id="target">
 	<header class="head">
 		<div class="wrapper">
-			<span id="logOutButton" class="btn">Log out</span>
 			<ul>
 				<li><a href="#">view generated PDF</a></li>
 				<li><a href="#">send PDF vie email</a></li>
 			</ul>
+			<span id="logOutButton" class="btn">Log out</span>
 		</div>
 	</header>
 	<main>
