@@ -8,6 +8,7 @@
 		var livepr			 	= new LivePreview();
 		var popup      			= new Popups();
 		var admin				= new AdminOperations();
+		var listpdf				= new ListCreatedPDF();
 	});
 
 
@@ -211,7 +212,7 @@
 
 					$.each(decodedData, function(key, val) {
 						
-						__this.usersTable.append('<tr><td class="readFirstName">' + val.firstName + '</td><td class="readLastName">' + val.lastName + '</td><td class="readEmail">' + val.email + '</td><td><span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit">Edit</span><span data-id="'+ val.id +'" data-popup-open="deleteUser" class="btn userDelete">Delete</span></td></tr>');
+						__this.usersTable.append('<tr><td class="readFirstName">' + val.firstName + '</td><td class="readLastName">' + val.lastName + '</td><td class="readEmail">' + val.email + '</td><td><span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Edit</span></span><span data-id="'+ val.id +'" data-popup-open="deleteUser" class="btn userDelete"><span>Delete</span></span></td></tr>');
 					});
 
 				},
@@ -268,6 +269,44 @@
 			});
 		});
 	};
+
+
+	/* List user generate pdf in user section -----------------------------*/
+	function ListCreatedPDF() {
+		this.pdfTable   = $('#createdPDFTable tbody');
+
+		this.load();
+	}
+
+	ListCreatedPDF.prototype.load = function() {
+		var _this = this;
+
+		if ( this.pdfTable.length ) {
+
+			this.pdfTable.empty();
+
+			$.ajax({
+				url: 'listAllPDF.php',
+				type: 'POST',
+				success: function(data) {
+					var __this = _this;
+					var decodedData = JSON.parse(data);
+
+					console.log(data);
+					$.each(decodedData, function(key, val) {
+
+						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deleteUser" class="btn userDelete"><span>Delete</span></span><span class="btn"><span>Send via Email</span></span></td></tr>');
+						__this.pdfTable.append('<tr><td colspan="3">hidden <textarea>'+val.htmlSource+'</textarea><textarea>'+val.cssSource+'</textarea> <span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Save changes</span></span> </td></tr>');
+					});
+
+				},
+				error: function() {
+					console.log('problem with listing users');
+				}
+			});
+		}
+	};
+
 
 
 })(jQuery);

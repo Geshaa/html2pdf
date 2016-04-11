@@ -24,7 +24,7 @@
 	</header>
 	<main>
 		<div class="wrapper listUsers">
-			<table id="listAllUsers">
+			<table id="listAllUsers" class="table">
 				<thead>
 					<tr>
 						<th>First Name</th>
@@ -60,7 +60,7 @@
 				<input type="password" id="edit-password" name="password" placeholder="Password" required>
 			</div>
 			<div class="popup__actions">
-				<button type="submit" data-user-id="" class="btn"> Save changes</button>
+				<button type="submit" data-user-id="" class="btn"><span>Save changes</span></button>
 			</div>
 		</form>
     </div>
@@ -69,7 +69,7 @@
         <span data-popup-close="deleteUser">X</span>
         <h2>Are you sure you want to delete this user ?</h2>
         <div class="popup__actions">
-            <a href="#" rel="nofollow" data-user-id="" class="btn" id="deleteUser" data-popup-close="deleteUser">Yes, delete</a>
+            <a href="#" rel="nofollow" data-user-id="" class="btn" id="deleteUser" data-popup-close="deleteUser"><span>Yes, delete</span></a>
         </div>
     </div>
 

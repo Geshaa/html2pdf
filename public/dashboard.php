@@ -19,10 +19,9 @@
 	<header class="head">
 		<div class="wrapper">
 			<ul>
-				<li><a href="#">view generated PDF</a></li>
-				<li><a href="#">send PDF vie email</a></li>
+				<li><a href="created.php">view generated PDF</a></li>
 			</ul>
-			<span id="logOutButton" class="btn">Log out</span>
+			<span id="logOutButton" class="btn"><span>Log out</span></span>
 		</div>
 	</header>
 	<main>
@@ -43,7 +42,7 @@
 						<textarea name="htmlSource" placeholder="Paste here HTML Code" id="htmlSource" rows="10" required></textarea>
 					</div>
 					<div>
-						<button type="submit" id="generatePdf" class="btn">Generate pdf</button>
+						<button type="submit" id="generatePdf" class="btn"><span>Generate pdf</span></button>
 					</div>
 				</form>
 			</div>
@@ -53,7 +52,7 @@
 						<span>CSS needs to be inline in style tag.</span>
 						<input type="file" name="uploadHTML" id="uploadHTML" required>
 					</label>
-					<button type="submit" class="btn"> Upload & Generate</button>
+					<button type="submit" class="btn"><span> Upload & Generate</span></button>
 				</form>
 			</div>
 		</div>
