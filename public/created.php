@@ -15,7 +15,7 @@ if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
     <title>html2pdf</title>
     <link rel="stylesheet" href="assets/front/css/style.css">
 </head>
-<body id="target">
+<body>
 <header class="head">
     <div class="wrapper">
         <ul>
@@ -40,6 +40,27 @@ if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
         </table>
     </div>
 </main>
+
+<div data-overlay="popup"></div>
+
+<div data-popup="deletepdf">
+    <span data-popup-close="deletepdf">X</span>
+    <h2>Are you sure you want to delete this pdf ?</h2>
+    <div class="popup__actions">
+        <a href="#" rel="nofollow" data-pdf-id="" class="btn" id="deletepdf" data-popup-close="deletepdf"><span>Yes, delete</span></a>
+    </div>
+</div>
+
+<div data-popup="sendpdf">
+    <span data-popup-close="sendpdf">X</span>
+    <h2>Enter email to send pdf.</h2>
+    <div class="popup__actions">
+        <form action="">
+            <input type="email" placeholder="john@doe.com" required>
+            <button type="submit" data-pdf-id="" class="btn" id="sendpdf" data-popup-close="sendpdf"><span>Send</span></button>
+        </form>
+    </div>
+</div>
 
 <script src="assets/front/js/scripts.js"></script>
 <!-- Delete livereload.js on production -->

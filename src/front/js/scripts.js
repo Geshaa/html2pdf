@@ -273,12 +273,17 @@
 
 	/* List user generate pdf in user section -----------------------------*/
 	function ListCreatedPDF() {
-		this.pdfTable   = $('#createdPDFTable tbody');
+		this.pdfTable   		= $('#createdPDFTable tbody');
+		this.pdfDeleteBtn 		= $('#deletepdf');
+		this.openDeletePopup	= $('.pdfDelete');
+		this.extendDetailsBtn 	= $('.extendDetails');
 
-		this.load();
+		this.init();
+		this.deletepdf();
+		this.events();
 	}
 
-	ListCreatedPDF.prototype.load = function() {
+	ListCreatedPDF.prototype.init = function() {
 		var _this = this;
 
 		if ( this.pdfTable.length ) {
@@ -295,8 +300,8 @@
 					console.log(data);
 					$.each(decodedData, function(key, val) {
 
-						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deleteUser" class="btn userDelete"><span>Delete</span></span><span class="btn"><span>Send via Email</span></span></td></tr>');
-						__this.pdfTable.append('<tr><td colspan="3">hidden <textarea>'+val.htmlSource+'</textarea><textarea>'+val.cssSource+'</textarea> <span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Save changes</span></span> </td></tr>');
+						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deletepdf" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails">extend</span></td></tr>');
+						__this.pdfTable.append('<tr class="hidden"><td colspan="3">hidden <textarea>'+val.htmlSource+'</textarea><textarea>'+val.cssSource+'</textarea> <span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Save changes</span></span> </td></tr>');
 					});
 
 				},
@@ -305,6 +310,39 @@
 				}
 			});
 		}
+	};
+
+	ListCreatedPDF.prototype.events = function() {
+
+		$(document).on(Browser.click(), this.openDeletePopup.selector, function() {
+			$('[data-popup="deletepdf"]').find('.btn').attr('data-pdf-id', $(this).attr('data-id'));
+		});
+
+		$(document).on(Browser.click(), this.extendDetailsBtn.selector, function() {
+			$(this).closest('tr').next().toggleClass('hidden');
+		});
+	};
+
+	ListCreatedPDF.prototype.deletepdf = function() {
+		var _this = this;
+
+		$(document).on(Browser.click(), this.pdfDeleteBtn.selector, function() {
+			var __this = _this;
+
+			$.ajax({
+				url: 'deletePdf.php',
+				type: 'POST',
+				data: {
+					id: $(this).attr('data-pdf-id')
+				},
+				success: function(data) {
+					__this.init();
+				},
+				error: function() {
+					console.log('problem with deleting pdf');
+				}
+			});
+		});
 	};
 
 

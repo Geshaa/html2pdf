@@ -15,7 +15,7 @@
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
 </head>
-<body id="target">
+<body>
 	<header class="head">
 		<div class="wrapper">
 			<p>Administrator panel</p>
