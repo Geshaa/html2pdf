@@ -301,7 +301,7 @@
 					$.each(decodedData, function(key, val) {
 
 						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deletepdf" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails">extend</span></td></tr>');
-						__this.pdfTable.append('<tr class="hidden"><td colspan="3">hidden <textarea>'+val.htmlSource+'</textarea><textarea>'+val.cssSource+'</textarea> <span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Save changes</span></span> </td></tr>');
+						__this.pdfTable.append('<tr class="hidden"><td colspan="3"><div class="codeHolder"><textarea>'+val.htmlSource+'</textarea><textarea>'+val.cssSource+'</textarea></div><span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Save changes</span></span> </td></tr>');
 					});
 
 				},

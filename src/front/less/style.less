@@ -322,10 +322,10 @@ input[type=number] {
 
 	.table tbody tr {
 		transition: all .3s ease;
-		visibility: visible;
+		display: table-row;
 
 		&.hidden {
-			visibility: hidden;
+			display: none;
 		}
 
 		td {
@@ -333,6 +333,22 @@ input[type=number] {
 
 			&:nth-of-type(3) {
 				width:40%;
+			}
+
+			.codeHolder {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+
+			textarea {
+				width:100%;
+				max-width:500px;
+				height:300px;
+			}
+
+			.userEdit {
+				margin: 0 auto;
 			}
 		}
 	}
