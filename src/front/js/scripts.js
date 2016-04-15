@@ -277,6 +277,9 @@
 		this.pdfDeleteBtn 		= $('#deletepdf');
 		this.openDeletePopup	= $('.pdfDelete');
 		this.extendDetailsBtn 	= $('.extendDetails');
+		this.editForm			= $('form[name="userEdit"]');
+		this.editCSS 			= $('textarea[name="listEditCss"]');
+		this.editHTML 			= $('textarea[name="listEditHtml"]');
 
 		this.init();
 		this.deletepdf();
@@ -297,11 +300,10 @@
 					var __this = _this;
 					var decodedData = JSON.parse(data);
 
-					console.log(data);
 					$.each(decodedData, function(key, val) {
 
-						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deletepdf" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails">extend</span></td></tr>');
-						__this.pdfTable.append('<tr class="hidden"><td colspan="3"><div class="codeHolder"><textarea>'+val.htmlSource+'</textarea><textarea>'+val.cssSource+'</textarea></div><span data-id="'+ val.id +'" data-popup-open="editUserData" class="btn userEdit"><span>Save changes</span></span> </td></tr>');
+						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deletepdf" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails"></span></td></tr>');
+						__this.pdfTable.append('<tr class="hidden"><td colspan="3"><form name="userEdit" method="post"><div class="codeHolder"><textarea name="listEditHtml">'+val.htmlSource+'</textarea><textarea name="listEditCss">'+val.cssSource+'</textarea></div><button type="submit" data-id="'+ val.id +'" class="btn userEdit"><span>Save changes</span></button></form></td></tr>');
 					});
 
 				},
@@ -313,13 +315,23 @@
 	};
 
 	ListCreatedPDF.prototype.events = function() {
+		var _this = this;
 
 		$(document).on(Browser.click(), this.openDeletePopup.selector, function() {
 			$('[data-popup="deletepdf"]').find('.btn').attr('data-pdf-id', $(this).attr('data-id'));
 		});
 
 		$(document).on(Browser.click(), this.extendDetailsBtn.selector, function() {
-			$(this).closest('tr').next().toggleClass('hidden');
+			$(this).toggleClass('active').closest('tr').next().toggleClass('hidden');
+		});
+
+		$(document).on('submit', this.editForm.selector , function(e) {
+			e.preventDefault();
+			
+			if ( _this.editCSS.val() === '' || _this.editHTML.val() === '' )
+				return;
+
+			//ajax here
 		});
 	};
 

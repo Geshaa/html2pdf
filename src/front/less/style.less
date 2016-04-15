@@ -338,17 +338,30 @@ input[type=number] {
 			.codeHolder {
 				display: flex;
 				align-items: center;
-				justify-content: space-around;
+				justify-content: space-between;
 			}
 
 			textarea {
-				width:100%;
-				max-width:500px;
+				width: 48%;
 				height:300px;
+				resize: vertical;
 			}
 
 			.userEdit {
-				margin: 0 auto;
+				margin-top: 10px;
+			}
+
+			.extendDetails {
+				display: inline-block;
+				width: 25px;
+				height: 25px;
+				#Sprite > .arrow-down();
+				cursor: pointer;
+				transition: all .3s ease;
+
+				&.active {
+					transform: rotate(180deg);
+				}
 			}
 		}
 	}
