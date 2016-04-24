@@ -55,9 +55,9 @@ if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
     <span data-popup-close="sendpdf">X</span>
     <h2>Enter email to send pdf.</h2>
     <div class="popup__actions">
-        <form action="">
-            <input type="email" placeholder="john@doe.com" required>
-            <button type="submit" data-pdf-id="" class="btn" id="sendpdf" data-popup-close="sendpdf"><span>Send</span></button>
+        <form method="POST" name="sendPdfToEmail">
+            <input type="email" placeholder="john@doe.com" name="emailRecepient" required>
+            <button type="submit" data-pdf-id="" class="btn" id="sendpdf"><span>Send</span></button>
         </form>
     </div>
 </div>

@@ -165,7 +165,7 @@
 
 			_this.overlay.addClass( _this.overlayVisibleCLass );
 			$('[data-popup="'+elToOpen+'"]').addClass('active');
-			$('[data-popup="'+elToOpen+'"]').find('.btn').attr('data-user-id', $(this).attr('data-id'));
+			// $('[data-popup="'+elToOpen+'"]').find('.btn').attr('data-user-id', $(this).attr('data-id'));
 		});
 
 		$(document).on( Browser.click(), this.closePopup.selector, function(e) {
@@ -277,9 +277,12 @@
 		this.pdfDeleteBtn 		= $('#deletepdf');
 		this.openDeletePopup	= $('.pdfDelete');
 		this.extendDetailsBtn 	= $('.extendDetails');
-		this.editForm			= $('form[name="userEdit"]');
+		this.editForm			= $('form[name="pdfEditForm"]');
 		this.editCSS 			= $('textarea[name="listEditCss"]');
 		this.editHTML 			= $('textarea[name="listEditHtml"]');
+		this.openPdfSendPopup	= $('.pdfSend');
+		this.sendPdfForm		= $('form[name="sendPdfToEmail"]');
+		this.emailRecepient		= this.sendPdfForm.find('input[type="email"]');
 
 		this.init();
 		this.deletepdf();
@@ -302,8 +305,8 @@
 
 					$.each(decodedData, function(key, val) {
 
-						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-id="'+ val.id +'" data-popup-open="deletepdf" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails"></span></td></tr>');
-						__this.pdfTable.append('<tr class="hidden"><td colspan="3"><form name="userEdit" method="post"><div class="codeHolder"><textarea name="listEditHtml">'+val.htmlSource+'</textarea><textarea name="listEditCss">'+val.cssSource+'</textarea></div><button type="submit" data-id="'+ val.id +'" class="btn userEdit"><span>Save changes</span></button></form></td></tr>');
+						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-popup-open="deletepdf" data-id="'+ val.id +'" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" data-id="'+ val.id +'" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails"></span></td></tr>');
+						__this.pdfTable.append('<tr class="hidden"><td colspan="3"><form name="pdfEditForm" method="post"><div class="codeHolder"><textarea name="listEditHtml">'+val.htmlSource+'</textarea><textarea name="listEditCss">'+val.cssSource+'</textarea></div><button type="submit" data-id="'+ val.id +'" class="btn pdfEdit"><span>Save changes</span></button></form></td></tr>');
 					});
 
 				},
@@ -321,17 +324,59 @@
 			$('[data-popup="deletepdf"]').find('.btn').attr('data-pdf-id', $(this).attr('data-id'));
 		});
 
+		$(document).on(Browser.click(), this.openPdfSendPopup.selector, function() {
+			$('[data-popup="sendpdf"]').find('.btn').attr('data-pdf-id', $(this).attr('data-id'));
+		});
+
 		$(document).on(Browser.click(), this.extendDetailsBtn.selector, function() {
 			$(this).toggleClass('active').closest('tr').next().toggleClass('hidden');
 		});
 
 		$(document).on('submit', this.editForm.selector , function(e) {
 			e.preventDefault();
-			
+			var __this = _this;
+
 			if ( _this.editCSS.val() === '' || _this.editHTML.val() === '' )
 				return;
 
-			//ajax here
+			$.ajax({
+				url: 'updatePdf.php',
+				type: 'POST',
+				data: {
+					htmlSource: $('textarea[name="listEditHtml"]').val(),
+					cssSource: $('textarea[name="listEditCss"]').val(),
+					id: $(this).find('.pdfEdit').attr('data-id')
+				},
+				success: function(data) {
+					__this.init();
+				},
+				error: function() {
+					console.log('problem with deleting user');
+				}
+			});
+		});
+
+		$(document).on('submit', this.sendPdfForm.selector, function(e) {
+			e.preventDefault();
+
+			if ( _this.emailRecepient.val() === '' )
+				return;
+
+			$.ajax({
+				url: 'sendPdf.php',
+				type: 'POST',
+				data: {
+					id: $(this).find('.btn').attr('data-pdf-id'),
+					emailRecepient: $('input[name="emailRecepient"]').val()
+				},
+				success: function(data) {
+					window.console.log(data);
+				},
+				error: function() {
+					console.log('problem with deleting user');
+				}
+			});
+
 		});
 	};
 
