@@ -1,10 +1,10 @@
 <?php
-include 'config.php';
+    include 'config.php';
 
-session_start();
-if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
-    header ("Location: index.php");
-}
+    session_start();
+    if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
+        header ("Location: index.php");
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +12,7 @@ if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>html2pdf</title>
+    <title>Created PDF`s</title>
     <link rel="stylesheet" href="assets/front/css/style.css">
 </head>
 <body>
@@ -21,7 +21,7 @@ if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
         <ul>
             <li><a href="dashboard.php">Generate New</a></li>
         </ul>
-        <span id="logOutButton" class="btn"><span>Log out</span></span>
+        <span id="logOutButton" class="btn"><span>Logout</span></span>
     </div>
 </header>
 <main>
@@ -35,7 +35,6 @@ if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
                 </tr>
             </thead>
             <tbody>
-
             </tbody>
         </table>
     </div>

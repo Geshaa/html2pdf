@@ -3,7 +3,6 @@
 (function($) {
 'use strict';
 	$(document).ready(function() {
-
 		var userAuthenticate 	= new UserAuthenticate();
 		var livepr			 	= new LivePreview();
 		var popup      			= new Popups();
@@ -34,7 +33,6 @@
 				type: 'POST',
 				data: $(this).serialize(),
 				success: function(data) {
-					console.log(data);
 					var __this = _this;
 
 					if ( data === '0' )
@@ -96,24 +94,29 @@
 		});
 	};
 
+
 	/* Live preview when entering HTML/CSS code -----------------------*/
 	function LivePreview() {
-		this.iframe 		= $('#livepreviewIframe');
-		this.contents 		= this.iframe.contents();
-		this.body 			= this.contents.find('body');
-		this.styleTag 		= this.contents.find('head').append('<style></style>').children('style');
+		this.iframe 				= $('#livepreviewIframe');
+		this.contents 				= this.iframe.contents();
+		this.iframeBody 			= this.contents.find('body');
+		this.styleTag 				= this.contents.find('head').append('<style></style>').children('style');
+		this.codeSourceTextareas 	= $('.dashboard__codeSource textarea');
+		this.uploadHTMLInput		= $('#uploadHTML');
+		this.uploadFileDisplayArea  = $('#fileDisplayArea');
 
 		this.events();
 	}
 
 	LivePreview.prototype.events = function() {
-		var _this = this;
+		var _this 			= this;
+		var fileInput 		= document.getElementById('uploadHTML');
 
-		$('.codeSource textarea').on('focus', function() {
+		this.codeSourceTextareas.on('focus', function() {
 			$(this).on('keyup', function() {
 
 				if ( $(this).attr('name') === 'htmlSource')
-					_this.body.html( $(this).val() );
+					_this.iframeBody.html( $(this).val() );
 				else
 					_this.styleTag.text( $(this).val() );
 
@@ -121,10 +124,7 @@
 			});
 		});
 
-		var fileInput = document.getElementById('uploadHTML');
-		var fileDisplayArea = document.getElementById('fileDisplayArea');
-
-		$('#uploadHTML').on('change', function(e) {
+		this.uploadHTMLInput.on('change', function(e) {
 			var file = fileInput.files[0];
 			var textType = /html.*/;
 
@@ -132,17 +132,19 @@
 				var reader = new FileReader();
 
 				reader.onload = function(e) {
-					_this.body.html( reader.result );
+					_this.iframeBody.html( reader.result );
 				};
 
 				reader.readAsText(file);
 				_this.iframe.css('height', '350px').parent().addClass('visible');
-
-			} else {
-				fileDisplayArea.innerText = 'File not supported!';
+				_this.uploadFileDisplayArea.removeClass('visible');
+			} 
+			else {
+				_this.uploadFileDisplayArea.addClass('visible').text('File not supported!');
 			}
 		});
 	};
+
 
 
 	/* Popup functionality ---------*/
@@ -180,16 +182,15 @@
 			$('[data-popup]').removeClass('active');
 			_this.overlay.removeClass( _this.overlayVisibleCLass );
 		});
-
-		
 	};
+
 
 
 	/* Admin page operations ---------------------------------------*/
 	function AdminOperations() {
 		this.deleteUserBtn			= $('#deleteUser');
-		this.updateUserForm			= $('form[name="updateUserForm"]');
 		this.usersTable 			= $('#listAllUsers tbody');
+		this.updateUserForm			= $('form[name="updateUserForm"]');
 		this.openUpdateForm			= $('.userEdit');
 
 		this.init();
@@ -271,6 +272,7 @@
 	};
 
 
+
 	/* List user generate pdf in user section -----------------------------*/
 	function ListCreatedPDF() {
 		this.pdfTable   		= $('#createdPDFTable tbody');
@@ -305,7 +307,7 @@
 
 					$.each(decodedData, function(key, val) {
 
-						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" /></td><td class="readLastName">' + val.dateCreated + '</td><td><span data-popup-open="deletepdf" data-id="'+ val.id +'" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" data-id="'+ val.id +'" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails"></span></td></tr>');
+						__this.pdfTable.append('<tr><td class="picture"><img src="' + val.photo + '" alt="pdf picture"/></td><td>' + val.dateCreated + '</td><td><span data-popup-open="deletepdf" data-id="'+ val.id +'" class="btn pdfDelete"><span>Delete</span></span><span data-popup-open="sendpdf" data-id="'+ val.id +'" class="btn pdfSend"><span>Send via Email</span></span><span class="extendDetails"></span></td></tr>');
 						__this.pdfTable.append('<tr class="hidden"><td colspan="3"><form name="pdfEditForm" method="post"><div class="codeHolder"><textarea name="listEditHtml">'+val.htmlSource+'</textarea><textarea name="listEditCss">'+val.cssSource+'</textarea></div><button type="submit" data-id="'+ val.id +'" class="btn pdfEdit"><span>Save changes</span></button></form></td></tr>');
 					});
 
@@ -351,7 +353,7 @@
 					__this.init();
 				},
 				error: function() {
-					console.log('problem with deleting user');
+					console.log('problem with updating pdf');
 				}
 			});
 		});
@@ -373,10 +375,9 @@
 					window.console.log(data);
 				},
 				error: function() {
-					console.log('problem with deleting user');
+					console.log('problem with updating sending mail with pdf attachment');
 				}
 			});
-
 		});
 	};
 
@@ -401,7 +402,5 @@
 			});
 		});
 	};
-
-
 
 })(jQuery);

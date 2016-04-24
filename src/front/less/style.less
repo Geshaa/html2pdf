@@ -1,12 +1,11 @@
 @import "../../modules/less/reset";
-@import "../../modules/less/fonts";
-@import "../../modules/less/flexboxgrid";
 @import "sprite";
 
 @border_color: #cecece;
+@base_font_size: 16px;
 
 html {
-	font-size: 16px;
+	font-size: @base_font_size;
 }
 
 html, body {
@@ -30,6 +29,17 @@ input {
 
 input[type=number] {
     -moz-appearance:textfield;
+}
+
+.notification {
+	padding: 15px 0;
+	color: red;
+	opacity: 0;
+	transition: all .3s ease;
+
+	&.visible {
+		opacity: 1;
+	}
 }
 
 .wrapper {
@@ -77,19 +87,15 @@ input[type=number] {
 		transition: width .2s ease-out, padding-top .2s ease-out;
 	}
 
-	&:hover {
-		background-color: #2440a5;
-	}
-
 	> * {
 		position: relative;
 	}
 
 	span {
 		display: block;
+		text-transform: capitalize;
 		padding: 12px 24px;
 	}
-
 }
 
 .table {
@@ -144,6 +150,7 @@ input[type=number] {
 	padding: 5px 0;
 }
 
+//dashboard
 .formHolder {
 	height: 100vh;
 	display: flex;
@@ -221,7 +228,10 @@ input[type=number] {
 
 	ul li {
 		display: inline-block;
-		margin: 0 15px;
+		
+		& + li {
+			margin-left: 30px;
+		}
 
 		a {
 			text-transform: capitalize;
@@ -249,7 +259,7 @@ input[type=number] {
 		color: #80b5ea;
 		opacity: 0;
 		z-index: -1;
-		transition: all .3s ease;
+		transition: all .5s ease;
 	}
 
 	iframe {
@@ -267,58 +277,49 @@ input[type=number] {
 		padding: 20px 0;
 	}
 
-	.codeSource {
+	&__codeSource {
 		max-width:60%;
-	}
-
-	.fileSource {
-		max-width:30%;
-	}
-}
-
-.codeSource {
-	width: 100%;
-
-	div {
-		margin-bottom: 30px;
-	}
-
-	textarea {
 		width: 100%;
-		display: block;
-		resize: vertical;
-		padding: 10px;
-		border: 1px solid @border_color;
 
-		&::placeholder {
-			color: @border_color;
+		div {
+			margin-bottom: 30px;
+		}
+
+		textarea {
+			width: 100%;
+			display: block;
+			resize: vertical;
+			padding: 10px;
+			border: 1px solid @border_color;
+
+			&::placeholder {
+				color: @border_color;
+			}
+		}
+
+		label {
+			display: block;
+			margin-bottom: 5px;
 		}
 	}
 
-	label {
-		display: block;
-		margin-bottom:5px;
-	}
-}
+	&__fileSource {
+		width: 100%;
+		max-width:30%;
 
-.fileSource {
+		label {
 
-	label {
-
-		input, span {
-			margin-bottom: 15px;
-			display: inline-block;
+			input, span {
+				margin-bottom: 15px;
+				display: inline-block;
+			}
 		}
 	}
 }
 
-//created pdf page
+//previously created pdf page
 .listPDF {
 	padding: 30px 15px;
-
-	.btn {
-		font-size: 1rem;
-	}
 
 	.table tbody tr {
 		transition: all .3s ease;
@@ -342,7 +343,8 @@ input[type=number] {
 			}
 
 			textarea {
-				width: 48%;
+				width: 100%;
+				max-width: 49%;
 				height:300px;
 				resize: vertical;
 			}
@@ -356,9 +358,9 @@ input[type=number] {
 				width: 25px;
 				height: 25px;
 				margin: 0 0 7px 7px;
-				#Sprite > .arrow-down();
 				cursor: pointer;
 				transition: all .3s ease;
+				#Sprite > .arrow-down();
 
 				&.active {
 					transform: rotate(180deg);
@@ -374,10 +376,6 @@ input[type=number] {
 		}
 	}
 }
-
-
-
-
 
 //administrator page
 .listUsers {
@@ -520,7 +518,6 @@ input[type=number] {
 	cursor: pointer;
 	display: inline-block;
 	padding: 3px;
-	
 }
 
 @import "../../modules/less/mediaQueries";

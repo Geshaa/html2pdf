@@ -14,7 +14,6 @@
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
 </head>
-
 <body>
 	<section class="formHolder loginHolder active">
 		<form method="post" name="loginForm">
@@ -54,7 +53,6 @@
 			<p class="formHolder__message">This email address is already taken.</p>
 		</form>
 	</section>
-	
 	<script src="assets/front/js/scripts.js"></script>
 	<!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>

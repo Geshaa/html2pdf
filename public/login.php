@@ -1,9 +1,9 @@
 <?php
 	include 'config.php';
 
-	$email = $_POST['email'];
-	$password = $_POST['password'];
-	$logged = false;
+	$email 		= $_POST['email'];
+	$password 	= $_POST['password'];
+	$logged 	= false;
 
 	$statement = $db->prepare("SELECT id, email, password, userLevel from users WHERE email = :email");
 	$statement->bindParam(':email', $email);
