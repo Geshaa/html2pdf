@@ -1,8 +1,9 @@
 <?php
-include 'config.php';
+require_once('Core.php');
 include 'mpdf/mpdf.php';
 include 'page2images.php';
 session_start();
+$core = Core::getInstance();
 
 //this is when html and css are separated files and code is put into textboxes
 $html   = $_POST['htmlSource'];
@@ -21,7 +22,7 @@ $mpdf->Output('filename'.date('m-d-Y').'.pdf', 'D');
 // F - force save
 // D - open or save
 
-$stm = $db->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated, photo) VALUES ( :user_id, :htmlSource, :cssSource, NOW(), :photo )");
+$stm = $core->dbh->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated, photo) VALUES ( :user_id, :htmlSource, :cssSource, NOW(), :photo )");
 $stm->bindParam(':user_id', $_SESSION['userID']);
 $stm->bindParam(':htmlSource', $html);
 $stm->bindParam(':cssSource', $css);

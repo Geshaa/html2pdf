@@ -1,7 +1,5 @@
 <?php
-
 /**
- * Created by PhpStorm.
  * User: Georgi
  * Date: 3/25/2016
  * Time: 3:14 PM
@@ -10,10 +8,10 @@ require_once('Configuration.php');
 
 class Core
 {
-    public $db; // handle of the db connexion
+    public $dbh; // handle of the db connection
     private static $instance;
 
-    private function __construct()
+    public function __construct()
     {
         // building data source name from config
         $dsn =  'mysql:host=' . Configuration::read('db.host') .
@@ -23,8 +21,8 @@ class Core
         $password = Configuration::read('db.password');
 
         try {
-            $this->db = new PDO($dsn, $user, $password);
-            $this->db->exec('set names utf8');
+            $this->dbh = new PDO($dsn, $user, $password);
+            $this->dbh->exec('set names utf8');
         } catch (PDOException $e) {
             echo 'Connection failed: ' . $e->getMessage();
         }
@@ -39,8 +37,6 @@ class Core
         }
         return self::$instance;
     }
-
-    // others global functions
 }
 
 ?>

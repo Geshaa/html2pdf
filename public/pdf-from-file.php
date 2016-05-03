@@ -1,7 +1,9 @@
 <?php
-include 'config.php';
+require_once('Core.php');
 include 'mpdf/mpdf.php';
 include 'page2images.php';
+
+$core = Core::getInstance();
 
 session_start();
 
@@ -26,7 +28,7 @@ $mpdf->SetDisplayMode('fullpage');
 $mpdf->WriteHTML($fileContent);
 $mpdf->Output('filename'.date('m-d-Y').'.pdf', 'D');
 
-$stm = $db->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated, photo) VALUES ( :user_id, :htmlSource, :cssSource, NOW(), :photo)");
+$stm = $core->dbh->prepare("INSERT INTO pdf(user_id, htmlSource, cssSource, dateCreated, photo) VALUES ( :user_id, :htmlSource, :cssSource, NOW(), :photo)");
 $stm->bindParam(':user_id', $_SESSION['userID']);
 $stm->bindParam(':htmlSource', $fileContent);
 $stm->bindParam(':cssSource', $css);

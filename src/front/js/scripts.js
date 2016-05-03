@@ -27,12 +27,15 @@
 
 		$(document).on('submit', this.loginForm.selector, function(e) {
 			e.preventDefault();
+			var formData = $(this).serializeArray();
+			formData.push({name: 'mode', value: 'login'});
 
 			$.ajax({
-				url: 'login.php',
+				url: 'lib/Authenticate.php',
 				type: 'POST',
-				data: $(this).serialize(),
+				data: formData,
 				success: function(data) {
+					window.console.log(data);
 					var __this = _this;
 
 					if ( data === '0' )
@@ -41,7 +44,6 @@
 						window.location = __this.url + '/admin.php';
 					else 
 						__this.loginForm.find('.formHolder__message').addClass('active');
-					
 				},
 				error: function() {
 					console.log('wrong user/password');
@@ -51,7 +53,9 @@
 
 		$(document).on(Browser.click(), this.logoutButton.selector , function() {
 			$.ajax({
-				url: 'logout.php',
+				url: 'lib/Authenticate.php',
+				type: 'POST',
+				data: {mode: 'logout'},
 				success: function(data) {
 					var __this = _this;
 					window.location = __this.url + '/index.php';
@@ -67,11 +71,13 @@
 
 		$(document).on('submit', this.registerForm.selector, function(e) {
 			e.preventDefault();
+			var formData = $(this).serializeArray();
+			formData.push({name: 'mode', value: 'register'});
 
 			$.ajax({
 				url: 'register.php',
 				type: 'POST',
-				data: $(this).serialize(),
+				data: formData,
 				success: function(data) {
 					var __this = _this;
 
@@ -192,6 +198,7 @@
 		this.usersTable 			= $('#listAllUsers tbody');
 		this.updateUserForm			= $('form[name="updateUserForm"]');
 		this.openUpdateForm			= $('.userEdit');
+		this.openDeleteForm			= $('.userDelete');
 
 		this.init();
 		this.events();
@@ -205,8 +212,9 @@
 			this.usersTable.empty();
 
 			$.ajax({
-				url: 'listAllUsers.php',
+				url: 'lib/AdministrateUsers.php',
 				type: 'POST',
+				data: {mode: 'list'},
 				success: function(data) {
 					var __this = _this;
 					var decodedData = JSON.parse(data);
@@ -231,12 +239,14 @@
 			var __this = _this;
 
 			$.ajax({
-				url: 'deleteUser.php',
+				url: 'lib/AdministrateUsers.php',
 				type: 'POST',
 				data: {
-					userID: $(this).attr('data-user-id')
+					userID: $(this).attr('data-user-id'),
+					mode: 'delete'
 				},
 				success: function(data) {
+					window.console.log(data);
 					__this.init();
 				},
 				error: function() {
@@ -252,14 +262,21 @@
 			$('#edit-password').val( $(this).closest('tr').find('.readEmail').text() );
 		});
 
+		$(document).on(Browser.click(), this.openDeleteForm.selector, function() {
+			_this.deleteUserBtn.attr('data-user-id',$(this).attr('data-id'));
+		});
+
 		$(document).on('submit', this.updateUserForm.selector , function(e) {
 			e.preventDefault();
 			var __this = _this;
+			
+			var formData = $(this).serializeArray();
+			formData.push({name: 'mode', value: 'update'});
 
 			$.ajax({
-				url: 'updateUser.php',
+				url: 'lib/AdministrateUsers.php',
 				type: 'POST',
-				data: $(this).serialize(),
+				data: formData,
 				success: function(data) {
 					$('[data-popup-close="editUserData"]').trigger('click');
 					__this.init();
@@ -299,7 +316,8 @@
 			this.pdfTable.empty();
 
 			$.ajax({
-				url: 'listAllPDF.php',
+				url: 'lib/ManagePDF.php',
+				data: { mode: 'list'},
 				type: 'POST',
 				success: function(data) {
 					var __this = _this;
@@ -342,9 +360,10 @@
 				return;
 
 			$.ajax({
-				url: 'updatePdf.php',
+				url: 'lib/ManagePDF.php',
 				type: 'POST',
 				data: {
+					mode: 'update',
 					htmlSource: $('textarea[name="listEditHtml"]').val(),
 					cssSource: $('textarea[name="listEditCss"]').val(),
 					id: $(this).find('.pdfEdit').attr('data-id')
@@ -365,9 +384,10 @@
 				return;
 
 			$.ajax({
-				url: 'sendPdf.php',
+				url: 'lib/ManagePDF.php',
 				type: 'POST',
 				data: {
+					mode: 'send',
 					id: $(this).find('.btn').attr('data-pdf-id'),
 					emailRecepient: $('input[name="emailRecepient"]').val()
 				},
@@ -388,9 +408,10 @@
 			var __this = _this;
 
 			$.ajax({
-				url: 'deletePdf.php',
+				url: 'lib/ManagePDF.php',
 				type: 'POST',
 				data: {
+					mode: 'delete',
 					id: $(this).attr('data-pdf-id')
 				},
 				success: function(data) {

@@ -1,10 +1,3 @@
-<?php 
-//	include 'config.php';
-//require_once('Core.php');
-//$core = Core::getInstance();
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

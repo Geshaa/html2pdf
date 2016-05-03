@@ -1,6 +1,4 @@
 <?php 
-	include 'config.php';
-
 	session_start();
 	if( ! (isset($_SESSION['userID']) && $_SESSION['userID'] != '') ){
 	    header ("Location: index.php");
