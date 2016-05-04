@@ -51,6 +51,15 @@
 					</label>
 					<button type="submit" class="btn"><span> Upload & Generate</span></button>
 				</form>
+				<aside class="dashboard__fileSource__instructions">
+					<ol>
+						<li>Upload you HTML file</li>
+						<li>CSS needs to be inline into style tag into the head</li>
+						<li>CSS shouldn`t countaint new css3 styles, cuz they are not supported by mpdf</li>
+						<li>When you upload the file, you will see a short preview</li>
+						<li>Upload&Generate will save pdf to your computer and add it to your profile</li>
+					</ol>
+				</aside>
 			</div>
 		</div>
 	</main>
