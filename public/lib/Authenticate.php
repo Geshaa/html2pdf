@@ -2,24 +2,30 @@
 require_once('../Core.php');
 
 class Authenticate {
+	private $email;
+	private $password;
+	private $firstName;
+	private $lastName;
+	private $core;
+	private $statement;
+	private $results;
 
 	public function login() {
-		$core = Core::getInstance();
+		$this->core 		= Core::getInstance();
 
-		$email 		= $_POST['email'];
-		$password 	= $_POST['password'];
-		$logged 	= false;
+		$this->email 		= $_POST['email'];
+		$this->password 	= $_POST['password'];
 
-		$statement = $core->dbh->prepare("SELECT id, email, password, userLevel from users WHERE email = :email");
-		$statement->bindParam(':email', $email);
-		$statement->execute();
+		$this->statement = $this->core->dbh->prepare("SELECT id, email, password, userLevel from users WHERE email = :email");
+		$this->statement->bindParam(':email', $this->email);
+		$this->statement->execute();
 
-		$results = $statement->fetch(PDO::FETCH_ASSOC);
+		$this->results = $this->statement->fetch(PDO::FETCH_ASSOC);
 
-		if( count($results) > 0 && password_verify($password, $results['password']) ) {
+		if( count($this->results) > 0 && password_verify($this->password, $this->results['password']) ) {
 			session_start();
-			$_SESSION['userID'] = $results['id'];
-			echo $results['userLevel'];
+			$_SESSION['userID'] = $this->results['id'];
+			echo $this->results['userLevel'];
 		}
 		else {
 			echo -1;
@@ -39,28 +45,28 @@ class Authenticate {
 	}
 
 	public function register() {
-		$core = Core::getInstance();
+		$this->core 		= Core::getInstance();
 
-		$firstName 		= $_POST['regFirstName'];
-		$lastName 		= $_POST['regLastName'];
-		$email 			= $_POST['regEmail'];
-		$password 		= $_POST['regPassword'];
+		$this->firstName 		= $_POST['regFirstName'];
+		$this->lastName 		= $_POST['regLastName'];
+		$this->email 			= $_POST['regEmail'];
+		$this->password 		= $_POST['regPassword'];
 
-		$statement = $core->dbh->prepare("SELECT COUNT(id) from users WHERE email = :email");
-		$statement->bindParam(':email', $email);
-		$statement->execute();
+		$this->statement = $this->core->dbh->prepare("SELECT COUNT(id) from users WHERE email = :email");
+		$this->statement->bindParam(':email', $this->email);
+		$this->statement->execute();
 
-		$count = $statement->fetchColumn();
+		$count = $this->statement->fetchColumn();
 
 		if ( $count === "1") {
 			echo $count;
 		}
 		else {
-			$hash = password_hash($password, PASSWORD_DEFAULT);
-			$stm = $db->prepare("INSERT INTO users(firstName, lastName, email, password) VALUES ( :firstName, :lastName, :email, :password)");
-			$stm->bindParam(':firstName', $firstName);
-			$stm->bindParam(':lastName', $lastName);
-			$stm->bindParam(':email', $email);
+			$hash = password_hash($this->password, PASSWORD_DEFAULT);
+			$stm = $this->core->dbh->prepare("INSERT INTO users(firstName, lastName, email, password) VALUES ( :firstName, :lastName, :email, :password)");
+			$stm->bindParam(':firstName', $this->firstName);
+			$stm->bindParam(':lastName', $this->lastName);
+			$stm->bindParam(':email', $this->email);
 			$stm->bindParam(':password', $hash);
 			$stm->execute(); 
 			echo $count;
@@ -78,7 +84,7 @@ switch($_POST['mode']) {
 	case 'logout':
 		$user->logout();
 		break;
-	case 'logout':
+	case 'register':
 		$user->register();
 		break;
 }

@@ -2,18 +2,21 @@
 require_once('../Core.php');
 
 class ManagePDF {
+	private $core;
+	private $statement;
+	private $results;
 
 	public function listAll() {
-		$core = Core::getInstance();
+		$this->core = Core::getInstance();
 		session_start();
 
-	    $statement = $core->dbh->prepare("SELECT id, htmlSource, cssSource, dateCreated, photo from pdf WHERE user_id = :userID");
-	    $statement->bindParam(':userID', $_SESSION['userID']);
-	    $statement->execute();
+	    $this->statement = $this->core->dbh->prepare("SELECT id, htmlSource, cssSource, dateCreated, photo from pdf WHERE user_id = :userID");
+	    $this->statement->bindParam(':userID', $_SESSION['userID']);
+	    $this->statement->execute();
 
-	    if ($statement) {
-	    	$results = $statement->fetchAll(PDO::FETCH_ASSOC);
-	    	echo json_encode($results);
+	    if ($this->statement) {
+	    	$this->results = $this->statement->fetchAll(PDO::FETCH_ASSOC);
+	    	echo json_encode($this->results);
 	    }
 	    else {
 	    	echo -1;
@@ -21,48 +24,49 @@ class ManagePDF {
 	}
 
 	public function update() {
-		$core = Core::getInstance();
+		$this->core = Core::getInstance();
 
 		$sql = "UPDATE pdf SET htmlSource = :htmlSource, cssSource = :cssSource WHERE id = :id";
-		$stmt = $core->dbh->prepare($sql);                                  
-		$stmt->bindParam(':htmlSource', $_POST['htmlSource']);       
-		$stmt->bindParam(':cssSource', $_POST['cssSource']);    
-		$stmt->bindParam(':id', $_POST['id']);
+		$this->statement = $this->core->dbh->prepare($sql);                                  
+		$this->statement->bindParam(':htmlSource', $_POST['htmlSource']);       
+		$this->statement->bindParam(':cssSource', $_POST['cssSource']);    
+		$this->statement->bindParam(':id', $_POST['id']);
 		 
-		$stmt->execute(); 
+		$this->statement->execute(); 
 	}
 
 	public function send() {
 		include '../mpdf/mpdf.php';
 		require_once '../swiftmailer/swift_required.php';
 
-		$core = Core::getInstance();
+		$this->core = Core::getInstance();
 
-		$smtp_host 			= 'givanov.eu';
+		$smtp_host 			= 'amur.superhosting.bg';
 		$fileName 			= 'temporary.pdf';
 		$smtp_username 		= 'html2pdf@givanov.eu';
 		$smtp_password 		= 't3st123';
 		$smtp_port 			= 25;
 		$from_email 		= $smtp_username;
-		$from_name			= 'ivan';
+		$from_name			= 'HTML2PDF convertor';
 		$to_email			= $_POST['emailRecepient'];
 		$email_body			= 'One of our users sends you email which contain pdf. Check it.';
 
 		//get data from database
-		$statement = $core->dbh->prepare("SELECT htmlSource, cssSource from pdf WHERE id = :id");
-	    $statement->bindParam(':id', $_POST['id']);
-	    $statement->execute();
-	    $results = $statement->fetch(PDO::FETCH_ASSOC);
+		$this->statement = $this->core->dbh->prepare("SELECT htmlSource, cssSource from pdf WHERE id = :id");
+	    $this->statement->bindParam(':id', $_POST['id']);
+	    $this->statement->execute();
+	    $this->results = $this->statement->fetch(PDO::FETCH_ASSOC);
 
 	    //create pdf
 		$mpdf   = new mPDF('utf-8','A4','','' , 2 , 2 , 2 , 2 , 2 , 2);
 		$mpdf->setAutoTopMargin = 'stretch'; // Set pdf top margin to stretch to avoid content overlapping
 		$mpdf->setAutoBottomMargin = 'stretch'; // Set pdf bottom margin to stretch to avoid content overlapping
 		$mpdf->SetDisplayMode('fullpage');
-		$html   = preg_replace("/<link href=.*?>(.*?)/", "", $results['htmlSource']);
-		$html   = preg_replace("/<script>(.*?)<\/script>/", "", $results['htmlSource']);
-		$mpdf->WriteHTML($results['cssSource'], 1);
+		$html   = preg_replace("/<link href=.*?>(.*?)/", "", $this->results['htmlSource']);
+		$html   = preg_replace("/<script>(.*?)<\/script>/", "", $this->results['htmlSource']);
+		$mpdf->WriteHTML($this->results['cssSource'], 1);
 		$mpdf->WriteHTML($html, 2);
+		$pdf_as_string = $mpdf->Output($fileName, 'S');
 
 		//send pdf as email attachment
 		$transporter = Swift_SmtpTransport::newInstance($smtp_host, $smtp_port);
@@ -77,7 +81,7 @@ class ManagePDF {
 				->setBody($email_body);
 
 		//need to check from real server if it sends mails
-		$attachment = Swift_Attachment::newInstance($mpdf->Output($fileName, 'F'), $fileName, 'application/pdf');
+		$attachment = Swift_Attachment::newInstance($pdf_as_string, $fileName, 'application/pdf');
 		$message->attach($attachment);  
 
 		$message->setContentType("text/html");
@@ -92,13 +96,13 @@ class ManagePDF {
 	}
 
 	public function delete() {
-		$core = Core::getInstance();
+		$this->core = Core::getInstance();
 		
 		$id = $_POST['id'];
 	
-		$statement = $core->dbh->prepare("DELETE from pdf WHERE id = :id");
-		$statement->bindParam(':id', $id);
-		$statement->execute();
+		$this->statement = $this->core->dbh->prepare("DELETE from pdf WHERE id = :id");
+		$this->statement->bindParam(':id', $id);
+		$this->statement->execute();
 	}
 }
 

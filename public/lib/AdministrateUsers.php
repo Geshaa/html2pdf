@@ -2,42 +2,43 @@
 require_once('../Core.php');
 
 class AdministrateUsers {
+	private $core;
+	private $statement;
+	private $results;
 
 	public function listAll() {
-		$core = Core::getInstance();
+		$this->core = Core::getInstance();
 
-		$statement = $core->dbh->prepare("SELECT id, firstName, lastName, email from users");
-		$statement->execute();
+		$this->statement = $this->core->dbh->prepare("SELECT id, firstName, lastName, email from users");
+		$this->statement->execute();
 
-		$results = $statement->fetchAll(PDO::FETCH_ASSOC);
+		$this->results = $this->statement->fetchAll(PDO::FETCH_ASSOC);
 
-	    echo json_encode($results);
+	    echo json_encode($this->results);
 	}
 
 	public function delete() {
-		$core = Core::getInstance();
-
-		$userID = $_POST['userID'];
+		$this->core = Core::getInstance();
 		
-		$statement = $core->dbh->prepare("DELETE from users WHERE id = :id");
-		$statement->bindParam(':id', $userID);
-		$statement->execute();
+		$this->statement = $this->core->dbh->prepare("DELETE from users WHERE id = :id");
+		$this->statement->bindParam(':id', $_POST['userID']);
+		$this->statement->execute();
 	}
 
 	public function update() {
-		$core = Core::getInstance();
+		$this->core = Core::getInstance();
 
 		$sql = "UPDATE users SET firstName = :firstName, 
             lastName = :lastName, 
             password = :password  
             WHERE id = :userID";
-		$stmt = $core->dbh->prepare($sql);                                  
-		$stmt->bindParam(':firstName', $_POST['firstName']);       
-		$stmt->bindParam(':lastName', $_POST['lastName']);    
-		$stmt->bindParam(':password', password_hash($_POST['password'], PASSWORD_DEFAULT) );
-		$stmt->bindParam(':userID', $_POST['userID']);
+		$this->statement = $this->core->dbh->prepare($sql);                                  
+		$this->statement->bindParam(':firstName', $_POST['firstName']);       
+		$this->statement->bindParam(':lastName', $_POST['lastName']);    
+		$this->statement->bindParam(':password', password_hash($_POST['password'], PASSWORD_DEFAULT) );
+		$this->statement->bindParam(':userID', $_POST['userID']);
 		 
-		$stmt->execute(); 
+		$this->statement->execute(); 
 	}
 }
 

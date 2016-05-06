@@ -75,7 +75,7 @@
 			formData.push({name: 'mode', value: 'register'});
 
 			$.ajax({
-				url: 'register.php',
+				url: 'lib/Authenticate.php',
 				type: 'POST',
 				data: formData,
 				success: function(data) {
@@ -392,7 +392,7 @@
 					emailRecepient: $('input[name="emailRecepient"]').val()
 				},
 				success: function(data) {
-					window.console.log(data);
+					$('[data-popup-close="sendpdf"]').trigger('click');
 				},
 				error: function() {
 					console.log('problem with updating sending mail with pdf attachment');
