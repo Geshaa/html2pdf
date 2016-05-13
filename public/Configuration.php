@@ -19,7 +19,7 @@ class Configuration
     }
 }
 
-// db test connection
+// db test connection  - use other password and user in real application
 Configuration::write('db.host', 'localhost');
 Configuration::write('db.basename', 'html2pdf');
 Configuration::write('db.user', 'root');
