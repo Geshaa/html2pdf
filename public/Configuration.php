@@ -19,7 +19,7 @@ class Configuration
     }
 }
 
-// db
+// db test connection
 Configuration::write('db.host', 'localhost');
 Configuration::write('db.basename', 'html2pdf');
 Configuration::write('db.user', 'root');
