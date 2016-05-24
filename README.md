@@ -1,7 +1,7 @@
 # html2pdf
 HTML to PDF converting tool.
 
-*Users
+* Users
 This platform allow registered users to be able to convert HTML/CSS document to PDF file.
 This could be done by two ways - from file source or from copy/paste html and css code.
 After that users are able to preview generated pdfs, edit, remove and send them to friends by email.
