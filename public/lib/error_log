@@ -1,0 +1,60 @@
+[06-May-2016 17:09:25 Europe/Sofia] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host givanov.eu [Network is unreachable #101]' in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php:269
+Stack trace:
+#0 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(88): Swift_Mailer->send(Object(Swift_Message))
+#4 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(119): ManagePDF->send()
+#5 {main}
+  thrown in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php on line 269
+[06-May-2016 17:11:05 Europe/Sofia] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host givanov.eu [Connection timed out #110]' in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php:269
+Stack trace:
+#0 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(88): Swift_Mailer->send(Object(Swift_Message))
+#4 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(119): ManagePDF->send()
+#5 {main}
+  thrown in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php on line 269
+[06-May-2016 17:13:49 Europe/Sofia] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host smtp.givanov.eu [php_network_getaddresses: getaddrinfo failed: Name or service not known #0]' in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php:269
+Stack trace:
+#0 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(88): Swift_Mailer->send(Object(Swift_Message))
+#4 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(119): ManagePDF->send()
+#5 {main}
+  thrown in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php on line 269
+[06-May-2016 17:15:28 Europe/Sofia] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host smtp.givanov.eu [php_network_getaddresses: getaddrinfo failed: Name or service not known #0]' in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php:269
+Stack trace:
+#0 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(88): Swift_Mailer->send(Object(Swift_Message))
+#4 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(119): ManagePDF->send()
+#5 {main}
+  thrown in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php on line 269
+[06-May-2016 17:18:26 Europe/Sofia] PHP Fatal error:  Uncaught exception 'Swift_TransportException' with message 'Connection could not be established with host amur.superhosting.bg [Connection refused #111]' in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php:269
+Stack trace:
+#0 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php(62): Swift_Transport_StreamBuffer->_establishSocketConnection()
+#1 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/AbstractSmtpTransport.php(113): Swift_Transport_StreamBuffer->initialize(Array)
+#2 /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Mailer.php(79): Swift_Transport_AbstractSmtpTransport->start()
+#3 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(88): Swift_Mailer->send(Object(Swift_Message))
+#4 /home/givanove/public_html/html2pdf/lib/ManagePDF.php(119): ManagePDF->send()
+#5 {main}
+  thrown in /home/givanove/public_html/html2pdf/swiftmailer/classes/Swift/Transport/StreamBuffer.php on line 269
+[12-Jun-2016 21:56:04 Europe/Sofia] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 48
+[12-Jun-2016 22:01:51 Europe/Sofia] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 48
+[12-Jun-2016 22:03:24 Europe/Sofia] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 48
+[12-Jun-2016 22:11:27 Europe/Sofia] PHP Warning:  session_destroy(): Trying to destroy uninitialized session in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 48
+[12-Jun-2016 22:39:05 Europe/Sofia] PHP Fatal error:  Call to a member function destroySession() on a non-object in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 43
+[12-Jun-2016 22:44:33 Europe/Sofia] PHP Warning:  require_once(/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php): failed to open stream: No such file or directory in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:44:33 Europe/Sofia] PHP Fatal error:  require_once(): Failed opening required '/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:44:48 Europe/Sofia] PHP Warning:  require_once(/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php): failed to open stream: No such file or directory in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:44:48 Europe/Sofia] PHP Fatal error:  require_once(): Failed opening required '/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:45:10 Europe/Sofia] PHP Warning:  require_once(/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php): failed to open stream: No such file or directory in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:45:10 Europe/Sofia] PHP Fatal error:  require_once(): Failed opening required '/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:47:15 Europe/Sofia] PHP Warning:  require_once(/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php): failed to open stream: No such file or directory in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 22:47:15 Europe/Sofia] PHP Fatal error:  require_once(): Failed opening required '/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 23:00:54 Europe/Sofia] PHP Warning:  require_once(/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php): failed to open stream: No such file or directory in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4
+[12-Jun-2016 23:00:54 Europe/Sofia] PHP Fatal error:  require_once(): Failed opening required '/home/givanove/public_html/html2pdf/lib../oauth/facebook/Facebook/autoload.php' (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/givanove/public_html/html2pdf/lib/Authenticate.php on line 4

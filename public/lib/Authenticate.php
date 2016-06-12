@@ -40,7 +40,6 @@ class Authenticate {
 			unset($_SESSION['userID']);
 
 		session_destroy();
-
 		echo 'destroy';
 	}
 

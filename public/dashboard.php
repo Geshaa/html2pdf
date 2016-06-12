@@ -19,7 +19,8 @@
 			<ul>
 				<li><a href="created.php">view generated PDF</a></li>
 			</ul>
-			<span id="logOutButton" class="btn"><span>Logout</span></span>
+			<span onclick="logoutFromApp();">Test FACEBOOK logout</span>
+			<span id="logOutButton" class="btn" onclick="logoutFromApp();"><span>Logout</span></span>
 		</div>
 	</header>
 	<main>
@@ -65,6 +66,7 @@
 	</main>
 
 	<script src="assets/front/js/scripts.js"></script>
+	<script src="oauth/facebook/fb.js" type="text/javascript"></script>
 	<!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>
 </body>
