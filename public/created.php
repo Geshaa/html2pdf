@@ -19,7 +19,7 @@
         <ul>
             <li><a href="dashboard.php">Generate New</a></li>
         </ul>
-        <span id="logOutButton" class="btn"><span>Logout</span></span>
+        <span id="logOutButton" class="btn" onclick="logoutFromApp();"><span>Logout</span></span>
     </div>
 </header>
 <main>
@@ -60,6 +60,8 @@
 </div>
 
 <script src="assets/front/js/scripts.js"></script>
+<script src="oauth/facebook/fb.js" type="text/javascript"></script>
+
 <!-- Delete livereload.js on production -->
 <script src="http://localhost:35755/livereload.js"></script>
 </body>

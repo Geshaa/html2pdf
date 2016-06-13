@@ -19,7 +19,6 @@
 			<ul>
 				<li><a href="created.php">view generated PDF</a></li>
 			</ul>
-			<span onclick="logoutFromApp();">Test FACEBOOK logout</span>
 			<span id="logOutButton" class="btn" onclick="logoutFromApp();"><span>Logout</span></span>
 		</div>
 	</header>

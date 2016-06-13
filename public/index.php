@@ -21,7 +21,9 @@
 				<span class="openForm" data-open="registerHolder">Register</span>
 				<button type="submit" class="btn"><span>Submit</span></button>
 			</div>
-			<div class="social-login">
+			<div class="formHolder__loginSocial">
+				<span onclick="logoutFromApp();">Test FACEBOOK logout</span>
+
 				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
 			</div>
 			<p class="formHolder__message">Invalid username or password</p>
@@ -46,15 +48,12 @@
 				<span class="openForm" data-open="loginHolder">Login</span>
 				<button type="submit" class="btn"><span>register</span></button>
 			</div>
-			<div class="social-login">
-				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
-			</div>
 			<p class="formHolder__message">This email address is already taken.</p>
 		</form>
 	</section>
+
 	<script src="assets/front/js/scripts.js"></script>
 	<script src="oauth/facebook/fb.js" type="text/javascript"></script>
-
 	<!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>
 </body>

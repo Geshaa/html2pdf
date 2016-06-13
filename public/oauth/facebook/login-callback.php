@@ -36,12 +36,6 @@ if (isset($accessToken)) {
     echo 'Facebook SDK returned an error: ' . $e->getMessage();
 }
 
-
-// $_SESSION['email']      = $profile['email'];
-// $_SESSION['first_name'] = $profile['first_name'];
-// $_SESSION['last_name']  = $profile['last_name'];
-// $_SESSION['id']  = $profile['id'];
-
 $core         = Core::getInstance();
 
 $firstName    = $profile['first_name'];

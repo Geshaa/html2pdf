@@ -58,7 +58,10 @@
 				data: {mode: 'logout'},
 				success: function(data) {
 					var __this = _this;
-					window.location = __this.url + '/index.php';
+
+					setTimeout(function() {  //because of delay that needs for facebook to remove the app from users profile
+						window.location = __this.url + '/index.php';
+					}, 1000);
 				}
 			});
 		});
