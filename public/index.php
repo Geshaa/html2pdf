@@ -1,3 +1,4 @@
+<?php header("Access-Control-Allow-Origin: *"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +8,12 @@
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
 
-	<script type="text/javascript" src="//platform.linkedin.com/in.js">
-		api_key:   775m9wk8a8m8o1
-		onLoad: onLinkedInLoad
-		authorize: false
-	</script>
+	<!-- Linked oauth-->
+<!--	<script type="text/javascript" src="//platform.linkedin.com/in.js">-->
+<!--		api_key:   775m9wk8a8m8o1-->
+<!--		onLoad: onLinkedInLoad-->
+<!--		authorize: false-->
+<!--	</script>-->
 </head>
 <body>
 	<section class="formHolder loginHolder active">
@@ -30,7 +32,10 @@
 			<div class="formHolder__loginSocial">
 				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
 				<div>
-					<script type="in/Login"></script>
+<!--					<script type="in/Login"></script>-->
+					<a href="https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=775m9wk8a8m8o1&https%3A%2F%2Fhtml2pdf.givanov.eu/dashboard.php&state=98765EeFWf45A53sdfKef4233&scope=r_basicprofile r_emailaddress">
+						<img src="./images/linkedin_connect_button.png" alt="Sign in with LinkedIn"/>
+					</a>
 				</div>
 			</div>
 			<p class="formHolder__message">Invalid username or password</p>
@@ -62,30 +67,28 @@
 	<script src="assets/front/js/scripts.js"></script>
 	<script src="oauth/facebook/fb.js" type="text/javascript"></script>
 
-	<script type="text/javascript">
-
-		// Setup an event listener to make an API call once auth is complete
-		function onLinkedInLoad() {
-			IN.Event.on(IN, "auth", getProfileData);
-		}
-
-		// Handle the successful return from the API call
-		function onSuccess(data) {
-			console.log(data);
-		}
-
-		// Handle an error response from the API call
-		function onError(error) {
-			console.log(error);
-		}
-
-		// Use the API call wrapper to request the member's basic profile data
-		function getProfileData() {
-//			IN.API.Raw("/people/~").result(onSuccess).error(onError);
-			IN.API.Profile("me").result(onSuccess).error(onError);
-		}
-
-	</script>
+<!--	<script type="text/javascript">-->
+<!---->
+<!--		// Setup an event listener to make an API call once auth is complete-->
+<!--		function onLinkedInLoad() {-->
+<!--			IN.Event.on(IN, "auth", getProfileData);-->
+<!--		}-->
+<!---->
+<!--		// Handle the successful return from the API call-->
+<!--		function onSuccess(data) {-->
+<!--			console.log(data);-->
+<!--		}-->
+<!---->
+<!--		// Handle an error response from the API call-->
+<!--		function onError(error) {-->
+<!--			console.log(error);-->
+<!--		}-->
+<!---->
+<!--		// Use the API call wrapper to request the member's basic profile data-->
+<!--		function getProfileData() {-->
+<!--			IN.API.Profile("me").fields("first-name", "last-name", "email-address", "id").result(onSuccess).error(onError);-->
+<!--		}-->
+<!--	</script>-->
 
 	<!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>

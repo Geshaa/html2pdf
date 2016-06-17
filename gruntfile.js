@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         config.jshint = {
             options: {
                 bitwise: true,
-                camelcase: true,
+                camelcase: false,
                 eqeqeq: true,
                 forin: true,
                 latedef: 'nofunc',
