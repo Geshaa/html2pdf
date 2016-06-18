@@ -1,4 +1,3 @@
-<?php header("Access-Control-Allow-Origin: *"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,13 +6,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
-
-	<!-- Linked oauth-->
-<!--	<script type="text/javascript" src="//platform.linkedin.com/in.js">-->
-<!--		api_key:   775m9wk8a8m8o1-->
-<!--		onLoad: onLinkedInLoad-->
-<!--		authorize: false-->
-<!--	</script>-->
 </head>
 <body>
 	<section class="formHolder loginHolder active">
@@ -31,10 +23,9 @@
 			</div>
 			<div class="formHolder__loginSocial">
 				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
-				<div>
-<!--					<script type="in/Login"></script>-->
-					<a href="https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=775m9wk8a8m8o1&https%3A%2F%2Fhtml2pdf.givanov.eu/dashboard.php&state=98765EeFWf45A53sdfKef4233&scope=r_basicprofile r_emailaddress">
-						<img src="./images/linkedin_connect_button.png" alt="Sign in with LinkedIn"/>
+				<div class="in-login-button">
+					<a href="oauth/linkedin/auth.php">
+						<img src="assets/front/img/linkedinButton.png" alt="Sign in with LinkedIn"/>
 					</a>
 				</div>
 			</div>
