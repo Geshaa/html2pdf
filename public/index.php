@@ -28,6 +28,9 @@
 						<img src="assets/front/img/linkedinButton.png" alt="Sign in with LinkedIn"/>
 					</a>
 				</div>
+				<div class="tw-login-button">
+					<a href="oauth/twitter/login.php">login with twitter</a>
+				</div>
 			</div>
 			<p class="formHolder__message">Invalid username or password</p>
 		</form>
