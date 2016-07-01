@@ -23,13 +23,15 @@
 			</div>
 			<div class="formHolder__loginSocial">
 				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
-				<div class="in-login-button">
+                <div class="tw-login-button">
+                    <a href="/oauth/twitter/index.php?connect=twitter">
+                        <img src="assets/front/img/twitterButton.png" alt="Login with Twitter">
+                    </a>
+                </div>
+                <div class="in-login-button">
 					<a href="oauth/linkedin/auth.php">
 						<img src="assets/front/img/linkedinButton.png" alt="Sign in with LinkedIn"/>
 					</a>
-				</div>
-				<div class="tw-login-button">
-					<a href="oauth/twitter/login.php">login with twitter</a>
 				</div>
 			</div>
 			<p class="formHolder__message">Invalid username or password</p>
