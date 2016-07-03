@@ -8,19 +8,6 @@
 		var popup      			= new Popups();
 		var admin				= new AdminOperations();
 		var listpdf				= new ListCreatedPDF();
-
-
-		//$.ajax({
-		//	type: 'GET',
-		//	url: 'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=775m9wk8a8m8o1e&redirect_uri=https%3A%2F%2Fhtml2pdf.givanov.eu/oauth/linkedin/login-callback.php%2Fauth%2Flinkedin&state=987654321&scope=r_basicprofile',
-		//	async: true,
-		//	dataType : 'jsonp',
-		//	crossDomain: true,
-		//	success: function(data, status, xhr) {
-		//		console.log(data);
-		//	}
-		//});
-
 	});
 
 

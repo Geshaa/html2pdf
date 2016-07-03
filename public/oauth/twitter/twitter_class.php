@@ -5,7 +5,7 @@ class TwitterLoginAPI
 	protected  $consumer_secret	 = '0bJFzbTcLHt9O77cLxb5llerG1vNw1U9mkfa22vfFF3wFq2qJS'; //Your Consumer Secret Key
 	protected  $oauth_callback	 = 'http://html2pdf.givanov.eu/oauth/twitter/login-callback.php';
 	
-	function login_twitter($twitter_connect = ''){
+	function login_twitter($twitter_connect = '') {
 		if ($this->consumer_key === '' || $this->consumer_secret === '') {
 			$err  = 'You need a consumer key and secret to test the sample code. Get one from <a href="https://twitter.com/apps">https://twitter.com/apps</a>';
 			$array_return = array('error' => $err);
@@ -35,10 +35,9 @@ class TwitterLoginAPI
 			$array_return = array('error' => $err);
 			return $array_return;
 		}
-		
 	}
 	
-	function twitter_callback(){
+	function twitter_callback() {
 		$connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $_SESSION['oauth_token'], $_SESSION['oauth_token_secret']);
 		$access_token = $connection->getAccessToken($_REQUEST['oauth_verifier']);	
 		$_SESSION['access_token'] = $access_token;
@@ -53,25 +52,26 @@ class TwitterLoginAPI
 		}
 	}
 	
-	function view(){
+	function view() {
 		$access_token = $_SESSION['access_token'];
 		$connection = new TwitterOAuth($this->consumer_key, $this->consumer_secret, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-		$params =array();
+		$params = array();
 		$params['include_entities']='false';
 
-//		$content = $connection->get('account/verify_credentials');
 		$content = $connection->get("account/verify_credentials", ['include_entities' => 'true', 'skip_status' => 'true', 'include_email' => 'true']);
 
-		var_dump($content);
+		$names 		= explode(' ', $content->name);
+		$firstName 	= array_shift($names);
+		$lastName  	= implode(' ',$names);
 
 		$return_array = array(
-			'profile_image_url' => 	$content->profile_image_url,
+			// 'profile_image_url' => 	$content->profile_image_url,
 			'id' 				=> 	$content->id,
-			'email' 				=> 	$content->email,
-			'first_name' 				=> 	$content->first_name,
-			'last_name' 				=> 	$content->last_name,
-			'name'			=> 	$content->name,
+			'email' 			=> 	$content->email,
+			'first_name' 		=> 	$firstName,
+			'last_name' 		=> 	$lastName,
+			// 'name'				=> 	$content->name,
 		);
 		return $return_array;
 	}
