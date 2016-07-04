@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="google-signin-client_id" content="97543720705-cumtct93h5qerf070jlv6bfehbf6d253.apps.googleusercontent.com">
 	<title>html2pdf</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
 </head>
@@ -23,6 +24,7 @@
 			</div>
 			<div class="formHolder__loginSocial">
 				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
+                <div class="g-signin2" data-onsuccess="onSignIn"></div>
                 <div class="tw-login-button">
                     <a href="/oauth/twitter/index.php?connect=twitter">
                         <img src="assets/front/img/twitterButton.png" alt="Login with Twitter">
@@ -33,7 +35,7 @@
 						<img src="assets/front/img/linkedinButton.png" alt="Sign in with LinkedIn"/>
 					</a>
 				</div>
-			</div>
+            </div>
 			<p class="formHolder__message">Invalid username or password</p>
 		</form>
 	</section>
@@ -60,7 +62,18 @@
 		</form>
 	</section>
 
-	<script src="assets/front/js/scripts.js"></script>
+<!--    <a href="#" onclick="signOut();">Google Sign out</a>-->
+<!--    <script>-->
+<!--        function signOut() {-->
+<!--            var auth2 = gapi.auth2.getAuthInstance();-->
+<!--            auth2.signOut().then(function () {-->
+<!--                console.log('User signed out.');-->
+<!--            });-->
+<!--        }-->
+<!--    </script>-->
+
+
+    <script src="assets/front/js/scripts.js"></script>
 	<script src="oauth/facebook/fb.js" type="text/javascript"></script>
 
 <!--	<script type="text/javascript">-->
@@ -86,7 +99,18 @@
 <!--		}-->
 <!--	</script>-->
 
-	<!-- Delete livereload.js on production -->
+    <script>
+        function onSignIn(googleUser) {
+            var profile = googleUser.getBasicProfile();
+            console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+            console.log('Name: ' + profile.getName());
+            console.log('Image URL: ' + profile.getImageUrl());
+            console.log('Email: ' + profile.getEmail());
+        }
+    </script>
+
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>
 </body>
 </html>
