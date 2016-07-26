@@ -1,4 +1,4 @@
-/*global console:false, alert:false,Browser:false, IN:false, UI_Anci:false, jQuery:false*/
+/*global console:false, alert:false,Browser:false, gapi:false, IN:false, UI_Anci:false, jQuery:false*/
 
 (function($) {
 'use strict';
@@ -9,17 +9,7 @@
 		var admin				= new AdminOperations();
 		var listpdf				= new ListCreatedPDF();
 
-
-
 	});
-    //
-	//function onSignIn(googleUser) {
-	//	var profile = googleUser.getBasicProfile();
-	//	console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-	//	console.log('Name: ' + profile.getName());
-	//	console.log('Image URL: ' + profile.getImageUrl());
-	//	console.log('Email: ' + profile.getEmail());
-	//}
 
 	/* Login/Logout/Register functionality -----------------------------*/
 	function UserAuthenticate()  {
@@ -438,3 +428,34 @@
 	};
 
 })(jQuery);
+
+function GoogleSingIn(googleUser) {
+	'use strict';
+
+	var profile = googleUser.getBasicProfile();
+
+	/*jshint camelcase: false */
+	var params = 'email='+profile.getEmail()+'&first_name='+profile.getGivenName()+'&last_name='+profile.getFamilyName()+'&accessToken='+gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().id_token;
+
+	var xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+		if(xmlHttp.readyState === 4 && xmlHttp.status === 200)
+		{
+			//console.log('test ajax success');
+			window.location.href = 'dashboard.php';
+		}
+	};
+
+	xmlHttp.open('POST', 'oauth/google/login-callback.php');
+	xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xmlHttp.send(params);
+
+	/*jshint camelcase: true */
+}
+
+function GoogleSignOut() {
+	'use strict';
+
+	var auth2 = gapi.auth2.getAuthInstance();
+	auth2.signOut();
+}
