@@ -12,6 +12,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<title>Your html to pdf convertor</title>
 	<link rel="stylesheet" href="assets/front/css/style.css">
+	<meta name="google-signin-client_id" content="97543720705-cumtct93h5qerf070jlv6bfehbf6d253.apps.googleusercontent.com">
 </head>
 <body>
 	<header class="head">
@@ -20,7 +21,8 @@
 				<li><a href="created.php">view generated PDF</a></li>
 			</ul>
 			<span id="logOutButton" class="btn" onclick="logoutFromApp();"><span>Logout</span></span>
-		</div>
+            <a href="#" onclick="signOut();">Google test Sign out</a>
+        </div>
 	</header>
 	<main>
 		<div class="wrapper livepreview">
@@ -66,7 +68,26 @@
 
 	<script src="assets/front/js/scripts.js"></script>
 	<script src="oauth/facebook/fb.js" type="text/javascript"></script>
-	<!-- Delete livereload.js on production -->
+
+
+    <script>
+        function onLoad() {
+            gapi.load('auth2', function() {
+                gapi.auth2.init();
+            });
+        }
+
+        function signOut() {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                console.log('User signed out.');
+            });
+        }
+
+    </script>
+    <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
+
+    <!-- Delete livereload.js on production -->
 	<script src="http://localhost:35755/livereload.js"></script>
 </body>
 </html>
