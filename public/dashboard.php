@@ -20,8 +20,7 @@
 			<ul>
 				<li><a href="created.php">view generated PDF</a></li>
 			</ul>
-			<span id="logOutButton" class="btn" onclick="logoutFromApp();"><span>Logout</span></span>
-            <a href="#" onclick="signOut();">Google test Sign out</a>
+			<span id="logOutButton" class="btn" onclick="logoutFromApp(); signOut();"><span>Logout</span></span>
         </div>
 	</header>
 	<main>
@@ -69,7 +68,6 @@
 	<script src="assets/front/js/scripts.js"></script>
 	<script src="oauth/facebook/fb.js" type="text/javascript"></script>
 
-
     <script>
         function onLoad() {
             gapi.load('auth2', function() {
@@ -83,7 +81,6 @@
                 console.log('User signed out.');
             });
         }
-
     </script>
     <script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 

@@ -19,7 +19,7 @@
         <ul>
             <li><a href="dashboard.php">Generate New</a></li>
         </ul>
-        <span id="logOutButton" class="btn" onclick="logoutFromApp();"><span>Logout</span></span>
+        <span id="logOutButton" class="btn" onclick="logoutFromApp(); signOut();"><span>Logout</span></span>
     </div>
 </header>
 <main>
@@ -61,6 +61,22 @@
 
 <script src="assets/front/js/scripts.js"></script>
 <script src="oauth/facebook/fb.js" type="text/javascript"></script>
+
+<script>
+    function onLoad() {
+        gapi.load('auth2', function() {
+            gapi.auth2.init();
+        });
+    }
+
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+</script>
+<script src="https://apis.google.com/js/platform.js?onload=onLoad" async defer></script>
 
 <!-- Delete livereload.js on production -->
 <script src="http://localhost:35755/livereload.js"></script>

@@ -5,8 +5,10 @@ require_once('twitter_class.php');
 require_once('../OAuthenticate.php');
 
 if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
-  $_SESSION['oauth_status'] = 'oldtoken';
-  header('Location: destroy.php');
+  	$_SESSION['oauth_status'] = 'oldtoken';
+	session_start();
+	session_destroy();
+	header('Location: https://twitter.com/logout');
 } else {
 	$objTwitterApi = new TwitterLoginAPI;
 	$connection = $objTwitterApi->twitter_callback();
