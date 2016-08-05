@@ -67,9 +67,8 @@
 		});
 
 		$(document).on(Browser.click(), this.openForms.selector ,function() {
-			var trg = $(this).attr('data-open');
 
-			$('.formHolder.' + trg).addClass('active').siblings().removeClass('active');
+			$('.formHolder__box__container').toggleClass('register');
 		});
 
 		$(document).on('submit', this.registerForm.selector, function(e) {

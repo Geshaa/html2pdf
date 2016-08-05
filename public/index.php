@@ -9,57 +9,69 @@
 	<link rel="stylesheet" href="assets/front/css/style.css">
 </head>
 <body>
-	<section class="formHolder loginHolder active">
-		<form method="post" name="loginForm">
-			<h1>Login details</h1>
-			<div>
-				<input type="email" required name="email" placeholder="Email">
-			</div>
-			<div>
-				<input type="password" required name="password" placeholder="****">
-			</div>
-			<div class="formHolder__buttons">
-				<span class="openForm" data-open="registerHolder">Register</span>
-				<button type="submit" class="btn"><span>Submit</span></button>
-			</div>
-			<div class="formHolder__loginSocial">
-				<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
-                <div class="g-signin2" data-onsuccess="GoogleSingIn"></div>
-                <div class="tw-login-button">
-                    <a href="/oauth/twitter/index.php?connect=twitter">
-                        <img src="assets/front/img/twitterButton.png" alt="Login with Twitter">
-                    </a>
-                </div>
-                <div class="in-login-button">
-					<a href="oauth/linkedin/auth.php">
-						<img src="assets/front/img/linkedinButton.png" alt="Sign in with LinkedIn"/>
-					</a>
+	<section class="formHolder">
+		<div class="formHolder__box">
+			<div class="formHolder__box__info">
+				<div class="login">
+					<span class="openForm">Sign in</span>
 				</div>
-            </div>
-			<p class="formHolder__message">Invalid username or password</p>
-		</form>
-	</section>
-	<section class="formHolder registerHolder">
-		<form method="post" name="registerForm">
-			<h1>Register details</h1>
-			<div>
-				<input type="text" name="regFirstName" placeholder="First name" required>
+				<div class="register">
+					<span class="openForm">Sign up</span>
+				</div>
 			</div>
-			<div>
-				<input type="text" name="regLastName" placeholder="Last name" required>
+			<div class="formHolder__box__container">
+				<div class="loginHolder">
+					<form method="post" name="loginForm">
+					<h1>Login details</h1>
+					<div>
+						<input type="email" required name="email" placeholder="Email">
+					</div>
+					<div>
+						<input type="password" required name="password" placeholder="****">
+					</div>
+					<div class="formHolder__buttons">
+						<button type="submit" class="btn"><span>Submit</span></button>
+					</div>
+					<div class="formHolder__loginSocial">
+						<div class="fb-login-button" data-scope="public_profile,email" data-share="true"  data-width="450" data-show-faces="true" onlogin="checkLoginState();"></div>
+						<div class="g-signin2" data-onsuccess="GoogleSingIn"></div>
+						<div class="tw-login-button">
+							<a href="/oauth/twitter/index.php?connect=twitter">
+								<img src="assets/front/img/twitterButton.png" alt="Login with Twitter">
+							</a>
+						</div>
+						<div class="in-login-button">
+							<a href="oauth/linkedin/auth.php">
+								<img src="assets/front/img/linkedinButton.png" alt="Sign in with LinkedIn"/>
+							</a>
+						</div>
+					</div>
+					<p class="formHolder__message">Invalid username or password</p>
+				</form>
+				</div>
+				<div class="registerHolder">
+					<form method="post" name="registerForm">
+						<h1>Register details</h1>
+						<div>
+							<input type="text" name="regFirstName" placeholder="First name" required>
+						</div>
+						<div>
+							<input type="text" name="regLastName" placeholder="Last name" required>
+						</div>
+						<div>
+							<input type="email" name="regEmail" placeholder="Email" required>
+						</div>
+						<div>
+							<input type="password" name="regPassword" placeholder="Password" required>
+						</div>
+						<div class="formHolder__buttons">
+							<button type="submit" class="btn"><span>register</span></button>
+						</div>
+						<p class="formHolder__message">This email address is already taken.</p>
+					</form>
+				</div>
 			</div>
-			<div>
-				<input type="email" name="regEmail" placeholder="Email" required>
-			</div>
-			<div>
-				<input type="password" name="regPassword" placeholder="Password" required>
-			</div>
-			<div class="formHolder__buttons">
-				<span class="openForm" data-open="loginHolder">Login</span>
-				<button type="submit" class="btn"><span>register</span></button>
-			</div>
-			<p class="formHolder__message">This email address is already taken.</p>
-		</form>
+		</div>
 	</section>
 
     <script src="assets/front/js/scripts.js"></script>
